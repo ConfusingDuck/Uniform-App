@@ -21,14 +21,18 @@ public class User {
 	
 	
 	public void signUp(String user, String pswd){
+		//The file name will be the username
 		fileName = user + ".txt";
+		//Create a .txt file for each new user to store their password
 		File file = new File(fileName);
-		
+
+		//If the file already exists, the username exists and cannot be used to sign up
 		if (file.exists()) {
 			System.out.print("Username already exists");
 		}
 		else {
 			try {
+				//Write the password to the file
 				FileWriter fw = new FileWriter(fileName);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(pswd);
@@ -45,17 +49,21 @@ public class User {
 	public boolean login(String user, String pswd){
 		fileName = user + ".txt";
 		try{
+			//Read the password in the file
 			FileReader fr = new FileReader(fileName);
 			BufferedReader br = new BufferedReader(fr);
 			String temp = br.readLine();
 			br.close();
+			//If the file's password equals the entered String, the user is granted access
 			if (temp.equals(pswd)) {
 				return true;
 			}
 		}
 		catch (IOException e) {
+		//If the file is not found, the user does not exist
 		      System.out.println("User does not exist.");
 		}
+		//Returns false if true is not returned
 		return false;
 	}
 	
