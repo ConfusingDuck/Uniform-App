@@ -111,17 +111,23 @@ public class GUI {
                 pf = pfPassword.getPassword();
                 password = String.valueOf(pf);
                 user = new User();
-                if (user.signUp(username, password)) {
+                if (user.signUp(username, password) == 1) {
                     JOptionPane.showMessageDialog(frame, "You are now signed up.");
                     //Move to next window, user has signed up
                     //Pas username in program to be used as identifier
 
                 }
-                else {
-                    JOptionPane.showMessageDialog(frame, "Username already exists.");
+                else if (user.signUp(username, password) == -1) {
+                    JOptionPane.showMessageDialog(frame, "Username already in use.");
                     username = "";
                     password = "";
                 }
+                else {
+                    JOptionPane.showMessageDialog(frame, "Invalid username or password.");
+                    username = "";
+                    password = "";
+                }
+
             }
         });
 
@@ -133,11 +139,11 @@ public class GUI {
 
         txtUsername.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         txtUsername.setForeground(Color.BLACK);
-        txtUsername.setToolTipText("Enter username here");
+        txtUsername.setToolTipText("Username cannot contain spaces");
         txtUsername.setMargin(new Insets(0, 3, 0, 3));
 
         pfPassword.setFont(new Font("Sans-serif", Font.PLAIN, 16));
-        pfPassword.setToolTipText("Enter password here");
+        pfPassword.setToolTipText("Password cannot contain spaces");
         pfPassword.setMargin(new Insets(0, 3, 0, 3));
         //txtPassword.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         //txtPassword.setForeground(Color.BLACK);
