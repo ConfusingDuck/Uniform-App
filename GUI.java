@@ -50,7 +50,7 @@ public class GUI {
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
-        lblUsername = new JLabel("Username (E-Mail): ");
+        lblUsername = new JLabel("Username: ");
         lblPassword = new JLabel("Password: ");
 
         txtUsername = new JTextField(15);
@@ -133,7 +133,7 @@ public class GUI {
 
         txtUsername.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         txtUsername.setForeground(Color.BLACK);
-        txtUsername.setToolTipText("Use e-mail as username");
+        txtUsername.setToolTipText("Enter username here");
         txtUsername.setMargin(new Insets(0, 3, 0, 3));
 
         pfPassword.setFont(new Font("Sans-serif", Font.PLAIN, 16));

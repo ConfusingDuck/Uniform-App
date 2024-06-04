@@ -31,6 +31,12 @@ public class User {
 			System.out.println("Username already exists");
 			return false;
 		}
+		else if (user.contains(" ") || pswd.contains(" ")) {
+			return false;
+		}
+		else if (user.length() < 1 || pswd.length() < 1) {
+			return false;
+		}
 		else {
 			try {
 				//Write the password to the file
