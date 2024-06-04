@@ -20,7 +20,7 @@ public class User {
 	
 	
 	
-	public void signUp(String user, String pswd){
+	public boolean signUp(String user, String pswd){
 		//The file name will be the username
 		fileName = user + ".txt";
 		//Create a .txt file for each new user to store their password
@@ -28,7 +28,8 @@ public class User {
 
 		//If the file already exists, the username exists and cannot be used to sign up
 		if (file.exists()) {
-			System.out.print("Username already exists");
+			System.out.println("Username already exists");
+			return false;
 		}
 		else {
 			try {
@@ -37,9 +38,11 @@ public class User {
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(pswd);
 				bw.close();
+				return true;
 			}
 			catch (IOException e) {
 			      System.out.println("Unable to sign up at the moment. Please try again.");
+				  return false;
 			}
 		}	
 	}
