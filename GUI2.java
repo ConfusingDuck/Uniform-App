@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Scanner;
 import java.awt.GridBagLayout;
-
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,27 +25,19 @@ public class GUI2 extends javax.swing.JFrame {
 
     public GUI2() {
 
-        frame = new JFrame();
-        panel = new JPanel();
-
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panel.setLayout(new GridBagLayout());
-        // c determines where an object is within the gridBagLayout
-        GridBagConstraints c = new GridBagConstraints();
-        // c is given insets to pad objects in the layout
-        c.insets = new Insets(0, 5, 20, 0);
-
-        // Automatically close program when frame is closed.
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Main Screen");
-        frame.setSize(1500, 1000);
-        frame.setLocationRelativeTo(null);
-        frame.add(panel);
-
+        JFrame window = new JFrame("Main SCreen");
+        String all = "hrfriuashfiuhaisdhfiysdfhas";
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        final JTextArea textArea = new JTextArea(10, 20);
+        JScrollPane scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        textArea.setText(all);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        window.add(scroll);
+        window.setSize(1500, 1000);
+        window.setVisible(true);
+        window.setLocationRelativeTo(null);
     }
 
-
-    public void show() {
-        frame.setVisible(true);
-    }
 }
