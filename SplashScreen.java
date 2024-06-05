@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 public class SplashScreen extends JWindow {
@@ -14,7 +15,6 @@ public class SplashScreen extends JWindow {
 
 
     public SplashScreen() {
-
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame = new JFrame();
         panel = new JPanel();
@@ -28,6 +28,7 @@ public class SplashScreen extends JWindow {
         picture = new ImageIcon(getClass().getResource("butt picture.png"));
         label = new JLabel(picture);
         panel.add(label);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
     //Make visible
