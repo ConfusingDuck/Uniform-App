@@ -5,14 +5,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
 import javax.swing.border.EmptyBorder;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class SplashScreen extends JWindow {
     private JPanel panel;
     private ImageIcon picture;
     private JLabel label;
-    private Timer timer;
     private JFrame frame;
 
 
@@ -27,17 +24,17 @@ public class SplashScreen extends JWindow {
         panel.setLayout(new BorderLayout(0, 0));
         frame.add(panel);
         
-
+        //Add the picture to a label
         picture = new ImageIcon(getClass().getResource("butt picture.png"));
         label = new JLabel(picture);
         panel.add(label);
 
     }
-
+    //Make visible
     public void show() {
         frame.setVisible(true);
     }
-
+    //Close window
     public void close(){
         frame.setVisible(false);
     }
