@@ -23,7 +23,6 @@ public class GUI {
     private JLabel lblUsername;
     private JLabel lblPassword;
     private JTextField txtUsername;
-    //private JTextField txtPassword;
     private JButton btnLogin;
     private JButton btnSignup;
     private String username;
