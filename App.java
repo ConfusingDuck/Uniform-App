@@ -7,7 +7,7 @@ public class App {
         try {
             SplashScreen splashScreen = new SplashScreen();
             splashScreen.show();
-            Thread.sleep(5000);
+            Thread.sleep(2500);
             splashScreen.close();
         }
         catch (Exception e) {
