@@ -97,7 +97,7 @@ public class GUI {
                     //Move to next window if login successful
                     //Pass username to be used in program as identifier of each user
                     GUI2 gui2 = new GUI2();
-                    gui2.setVisible(true);
+                    gui2.show();
                     close();
                 }
                 else {
