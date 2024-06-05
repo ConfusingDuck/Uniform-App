@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
@@ -40,5 +41,20 @@ public class GUI2 extends javax.swing.JFrame {
         frame.add(panel);
 
     }
+=======
+import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JWindow;
+import javax.swing.border.EmptyBorder;
+
+public class GUI2 extends javax.swing.JFrame {
+    JFrame frame;
+    JPanel panel;
+
+    public GUI2
+>>>>>>> Stashed changes
 
 }
