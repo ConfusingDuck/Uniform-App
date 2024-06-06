@@ -100,6 +100,9 @@ public class ContactInfo{
                 if (email.contains("@") && (email.contains(".com") || email.contains(".ca"))) {
                     validEmail = true;
                 }
+                else {
+                    JOptionPane.showMessageDialog(contactInfoFrame, "Invalid email.");
+                }
 
                 if (phoneNumber.length() == 10) {
                     for (int x = 0; x < 10; x++) {

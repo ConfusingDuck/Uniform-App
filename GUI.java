@@ -116,7 +116,9 @@ public class GUI {
                     JOptionPane.showMessageDialog(frame, "You are now signed up.");
                     // Move to next window, user has signed up successfully
                     // Pass username in program to be used as identifier
-
+                    frame.hide();
+                    ContactInfo contactInfo = new ContactInfo(username, password);
+                    contactInfo.show();
                 }
                 // If the error type is -1, print the username is already in use
                 else if (user.signUp(username, password) == -1) {
