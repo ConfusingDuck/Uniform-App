@@ -1,38 +1,19 @@
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Color;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.awt.GridBagLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JOptionPane;
 
-public class GUI2 extends javax.swing.JFrame {
-
+public class GUI2 extends JFrame {
     private JFrame window;
-    private JPanel panel;
+    private JPanel clothingPanel;
     private List<Clothing> clothes;
 
     public GUI2() {
         // Initialize clothing list
         clothes = new ArrayList<>();
-        // fill in teh actual pictures here
-        clothes.add(new Clothing());
-        clothes.add(new Clothing());
+        // Add clothing items with actual image paths
+        clothes.add(new Clothing("T-Shirt", "Comfortable cotton t-shirt", 19.99, "path/to/tshirt.jpg"));
+        clothes.add(new Clothing("Jeans", "Stylish denim jeans", 39.99, "path/to/jeans.jpg"));
         // Add more clothing items as needed
 
         // Set up the main window
@@ -40,36 +21,33 @@ public class GUI2 extends javax.swing.JFrame {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(1500, 1000);
         window.setLocationRelativeTo(null);
+        window.setLayout(new BorderLayout());
 
-        panel = new JPanel(new GridBagLayout());
+        // Add a title label
+        JLabel titleLabel = new JLabel("Clothing Marketplace", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        window.add(titleLabel, BorderLayout.NORTH);
+
+        // Create the panel with GridBagLayout for clothing items
+        clothingPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.BOTH;
 
-        // Add a title label
-        JLabel titleLabel = new JLabel("Clothing Marketplace");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        panel.add(titleLabel, gbc);
-
-        // Reset gridwidth for other components
-        gbc.gridwidth = 1;
-
         // Create a panel for each clothing item
-        int row = 1;
+        int row = 0;
         for (Clothing clothing : clothes) {
             gbc.gridx = 0;
             gbc.gridy = row;
-            panel.add(createClothingPanel(clothing), gbc);
+            clothingPanel.add(createClothingPanel(clothing), gbc);
             row++;
         }
 
-        // Add a scroll pane to the panel
-        JScrollPane scrollPane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        window.add(scrollPane);
+        // Add a scroll pane to the clothing panel
+        JScrollPane scrollPane = new JScrollPane(clothingPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        window.add(scrollPane, BorderLayout.CENTER);
+
         window.setVisible(true);
     }
 
@@ -103,5 +81,4 @@ public class GUI2 extends javax.swing.JFrame {
 
         return panel;
     }
-
 }

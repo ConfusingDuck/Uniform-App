@@ -14,11 +14,11 @@ public class Clothing {
         size = "";
     }
 
-    public Clothing(double p, String c, String g, String s) {
-        price = p;
-        condition = c;
-        gender = g;
-        size = s;
+    public Clothing(String name, String condition, double price, String imagePath) {
+        this.name = name;
+        this.condition = condition;
+        this.price = price;
+        this.imagePath = imagePath;
     }
 
     public void setCondition(String c) {
