@@ -5,7 +5,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridBagLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JOptionPane;
 
-
 public class GUI {
 
     private JFrame frame;
@@ -23,15 +21,13 @@ public class GUI {
     private JLabel lblUsername;
     private JLabel lblPassword;
     private JTextField txtUsername;
-    //private JTextField txtPassword;
     private JButton btnLogin;
     private JButton btnSignup;
-    public String username;
+    private String username;
     private String password;
     private User user;
     private JPasswordField pfPassword;
     private char[] pf;
-
 
     public GUI() {
 
@@ -40,19 +36,19 @@ public class GUI {
 
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setLayout(new GridBagLayout());
-        //c determines where an object is within the gridBagLayout
+        // c determines where an object is within the gridBagLayout
         GridBagConstraints c = new GridBagConstraints();
-        //c is given insets to pad objects in the layout
+        // c is given insets to pad objects in the layout
         c.insets = new Insets(0, 5, 20, 0);
 
-        //Automatically close program when frame is closed.
+        // Automatically close program when frame is closed.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Uniform Marketplace");
         frame.setSize(800, 500);
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
-        //Create new labels, text boxes, and buttons for usernames and passwords
+        // Create new labels, text boxes, and buttons for usernames and passwords
         lblUsername = new JLabel("Username: ");
         lblPassword = new JLabel("Password: ");
 
@@ -64,7 +60,7 @@ public class GUI {
         btnLogin = new JButton("Login");
         btnSignup = new JButton("Sign up");
 
-        //Place each object in the grid layout by giving c x and y coordinates
+        // Place each object in the grid layout by giving c x and y coordinates
         c.gridx = 0;
         c.gridy = 0;
         panel.add(lblUsername, c);
@@ -80,27 +76,26 @@ public class GUI {
         c.gridx = 1;
         panel.add(btnSignup, c);
 
-        //Add an action listener to the login button to perform a task when pressed
+        // Add an action listener to the login button to perform a task when pressed
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Get the username and password from their text boxes
+                // Get the username and password from their text boxes
                 username = txtUsername.getText();
                 pf = pfPassword.getPassword();
-                //Password field return an array of chars, which we convert to a string
+                // Password field return an array of chars, which we convert to a string
                 password = String.valueOf(pf);
-                //Create a new user object
+                // Create a new user object
                 user = new User();
-                //Check if the login credentials are valid
-                if(user.login(username, password)){
+                // Check if the login credentials are valid
+                if (user.login(username, password)) {
                     JOptionPane.showMessageDialog(frame, "You are logged in.");
-                    //Move to next window if login successful
-                    //Pass username to be used in program as identifier of each user
+                    // Move to next window if login successful
+                    // Pass username to be used in program as identifier of each user
                     GUI2 gui2 = new GUI2();
-                    gui2.setVisible(true);
+                    gui2.show();
                     close();
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(frame, "Invalid username or password.");
                     username = "";
                     password = "";
@@ -108,32 +103,28 @@ public class GUI {
             }
         });
 
-        //Create a similar action listener for the sign up button
+        // Create a similar action listener for the sign up button
         btnSignup.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 username = txtUsername.getText();
                 pf = pfPassword.getPassword();
                 password = String.valueOf(pf);
                 user = new User();
-                //There are two types of errors and one success when signing up
+                // There are two types of errors and one success when signing up
                 if (user.signUp(username, password) == 1) {
                     JOptionPane.showMessageDialog(frame, "You are now signed up.");
-                    //Move to next window, user has signed up successfully
-                    //Pass username in program to be used as identifier
-                    
-                    //Add in contact info screen
-                    frame.hide();
-                    ContactInfo contactInfo = new ContactInfo(username, password);
-                    contactInfo.show();
+                    // Move to next window, user has signed up successfully
+                    // Pass username in program to be used as identifier
+
                 }
-                //If the error type is -1, print the username is already in use
+                // If the error type is -1, print the username is already in use
                 else if (user.signUp(username, password) == -1) {
                     JOptionPane.showMessageDialog(frame, "Username already in use.");
                     username = "";
                     password = "";
                 }
-                //If the error type is -2, the username is invalid (contains spaces etc.)
+                // If the error type is -2, the username is invalid (contains spaces etc.)
                 else {
                     JOptionPane.showMessageDialog(frame, "Invalid username or password.");
                     username = "";
@@ -160,12 +151,12 @@ public class GUI {
 
     }
 
-    /*This method sets the frame to visible */
+    /* This method sets the frame to visible */
     public void show() {
         frame.setVisible(true);
     }
 
-    /*This method sets the frame to invisible */
+    /* This method sets the frame to invisible */
     public void close() {
         frame.setVisible(false);
     }
