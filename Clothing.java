@@ -4,15 +4,17 @@ public class Clothing {
     private String gender;
     private String size;
     private String rPrice;
+    private String imagePath;
+    private String name;
 
-    public Clothing(){
+    public Clothing() {
         price = 0;
         condition = "";
         gender = "";
         size = "";
     }
 
-    public Clothing(double p, String c, String g, String s){
+    public Clothing(double p, String c, String g, String s) {
         price = p;
         condition = c;
         gender = g;
@@ -47,8 +49,16 @@ public class Clothing {
         return gender;
     }
 
-    public String getSize(){
+    public String getSize() {
         return size;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String toString() {

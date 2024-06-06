@@ -13,9 +13,8 @@ public class SplashScreen extends JWindow {
     private JLabel label;
     private JFrame frame;
 
-
     public SplashScreen() {
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame = new JFrame();
         panel = new JPanel();
         frame.setSize(1600, 1200);
@@ -23,20 +22,22 @@ public class SplashScreen extends JWindow {
         panel.setBorder(new EmptyBorder(5, 5, 5, 5));
         panel.setLayout(new BorderLayout(0, 0));
         frame.add(panel);
-        
-        //Add the picture to a label
+
+        // Add the picture to a label
         picture = new ImageIcon(getClass().getResource("butt picture.png"));
         label = new JLabel(picture);
         panel.add(label);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
-    //Make visible
+
+    // Make visible
     public void show() {
         frame.setVisible(true);
     }
-    //Close window
-    public void close(){
+
+    // Close window
+    public void close() {
         frame.setVisible(false);
     }
 }
