@@ -1,0 +1,114 @@
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.Color;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+
+public class ContactInfo{
+    private JPanel contactInfoPanel;
+    private JFrame contactInfoFrame;
+
+    private JLabel lblFullName;
+    private JLabel lblEmail;
+    private JLabel lblPhoneNumber;
+    private JTextField txtFullName;
+    private JTextField txtEmail;
+    private JTextField txtPhoneNumber;
+    private JButton confirmButton;
+
+    private String fullName;
+    private String email;
+    private String phoneNumber;
+    private User user;
+
+
+    public ContactInfo(String username, String password) {
+
+        contactInfoFrame = new JFrame();
+        contactInfoPanel = new JPanel();
+
+        contactInfoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        contactInfoPanel.setLayout(new GridBagLayout());
+        //c determines where an object is within the gridBagLayout
+        GridBagConstraints c = new GridBagConstraints();
+        //c is given insets to pad objects in the layout
+        c.insets = new Insets(0, 5, 20, 0);
+
+        //Automatically close program when frame is closed.
+        contactInfoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        contactInfoFrame.setTitle("Contact Info");
+        contactInfoFrame.setSize(800, 500);
+        contactInfoFrame.setLocationRelativeTo(null);
+        contactInfoFrame.add(contactInfoPanel);
+
+        //Create new labels, text boxes, and buttons for usernames and passwords
+        lblFullName = new JLabel("Enter Full Name: ");
+        lblEmail = new JLabel("Enter Email: ");
+        lblPhoneNumber = new JLabel("Enter Phone Number: ");
+        confirmButton = new JButton("Confirm");
+
+        txtFullName = new JTextField(15);
+        txtFullName.setMaximumSize(txtFullName.getPreferredSize());
+        txtEmail = new JTextField(15);
+        txtEmail.setMaximumSize(txtEmail.getPreferredSize());
+        txtPhoneNumber = new JTextField(15);
+        txtPhoneNumber.setMaximumSize(txtPhoneNumber.getPreferredSize());
+
+        //Place each object in the grid layout by giving c x and y coordinates
+        c.gridx = 0;
+        c.gridy = 0;
+        contactInfoPanel.add(lblFullName, c);
+        c.gridx = 1;
+        contactInfoPanel.add(txtFullName, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        contactInfoPanel.add(lblEmail, c);
+        c.gridx = 1;
+        contactInfoPanel.add(txtEmail, c);
+        c.gridx = 0;
+        c.gridy = 2;
+        contactInfoPanel.add(lblPhoneNumber, c);
+        c.gridx = 1;
+        contactInfoPanel.add(txtPhoneNumber, c);
+        c.gridx = 1;
+        c.gridy = 3;
+        contactInfoPanel.add(confirmButton, c);
+
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fullName = txtFullName.getText();
+                email = txtEmail.getText();
+                phoneNumber = txtPhoneNumber.getText();
+                user = new User();
+                user.addContactInfo(username, password, fullName, email, phoneNumber);
+
+                JOptionPane.showMessageDialog(contactInfoFrame, "Your contact information has been added.");
+                    //Move to next window if login successful
+                    //Pass username to be used in program as identifier of each user
+                    GUI2 gui2 = new GUI2();
+                    gui2.setVisible(true);
+                    close();
+            }
+        });
+    }
+    /*This method sets the frame to visible */
+    public void show() {
+        contactInfoFrame.setVisible(true);
+    }
+
+    /*This method sets the frame to invisible */
+    public void close() {
+        contactInfoFrame.setVisible(false);
+    }
+}

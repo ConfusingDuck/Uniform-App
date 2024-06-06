@@ -53,6 +53,24 @@ public class User {
 		}	
 	}
 	
+	public void addContactInfo(String user, String password, String fullName, String email, String phoneNumber) {
+		fileName = user + ".txt";
+		try {
+			FileWriter fw = new FileWriter(fileName);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(password);
+			bw.newLine();
+			bw.write(fullName);
+			bw.newLine();
+			bw.write(email);
+			bw.newLine();
+			bw.write(phoneNumber);
+			bw.close();
+		}
+		catch (IOException e){
+			System.out.println("There was an error adding your contact information");
+		}
+	}
 	
 	
 	public boolean login(String user, String pswd){
