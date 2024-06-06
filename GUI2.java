@@ -12,8 +12,8 @@ public class GUI2 extends JFrame {
         // Initialize clothing list
         clothes = new ArrayList<>();
         // Add clothing items with actual image paths
-        clothes.add(new Clothing("T-Shirt", "Lightly-used", 19.99, "jeans example", "large"));
-        clothes.add(new Clothing("Jeans", "Brand-new", 39.99, "jeans example", "small"));
+        clothes.add(new Clothing("T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large"));
+        clothes.add(new Clothing("Jeans", "Brand-new", 39.99, "jeans example.png", "small"));
         // Add more clothing items as needed
 
         // Set up the main window
