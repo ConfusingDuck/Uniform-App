@@ -101,19 +101,8 @@ public class ContactInfo{
                     validEmail = true;
                 }
 
-                if (phoneNumber.length() == 10) {
-                    for (int x = 0; x < 10; x++) {
-                        if ((int) phoneNumber.charAt(x) >= 48 && (int) phoneNumber.charAt(x) <= 57) {
-                            if (x == 9) {
-                                validPhoneNumber = true;
-                            }
-                        } 
-                        if ((int) phoneNumber.charAt(x) < 48 || (int) phoneNumber.charAt(x) > 57) {
-                            JOptionPane.showMessageDialog(contactInfoFrame, "Invalid phone number.");
-                            break;
-                        }
-                    }
-                }
+
+            
 
                 if (validEmail && validPhoneNumber) {
                     //Creates new user object
