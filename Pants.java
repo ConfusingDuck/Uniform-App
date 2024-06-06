@@ -1,11 +1,11 @@
 public class Pants extends Clothing {
 
-    public Pants(){
+    public Pants() {
         super();
     }
 
-    public Pants(double p, String c, String g, String s) {
-        super(p,c,g,s);
+    public Pants(String p, String c, Double g, String i, String s) {
+        super(p, c, g, i, s);
     }
 
 }
