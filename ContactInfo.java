@@ -93,18 +93,28 @@ public class ContactInfo{
                 fullName = txtFullName.getText();
                 email = txtEmail.getText();
                 phoneNumber = txtPhoneNumber.getText();
-                //Creates new user object
-                user = new User();
-                //Calls the addContactInfo method to add all of their info onto their user file
-                user.addContactInfo(username, password, fullName, email, phoneNumber);
 
-                //Adds a pop up that tells the user that the information has been added
-                JOptionPane.showMessageDialog(contactInfoFrame, "Your contact information has been added.");
+                boolean validEmail = false;
+                boolean validPhoneNumber = false;
+
+                if (email.contains("@") && (email.contains(".com") || email.contains(".ca"))) {
+                    validEmail = true;
+                }
+
+                if (validEmail && validPhoneNumber) {
+                    //Creates new user object
+                    user = new User();
+                    //Calls the addContactInfo method to add all of their info onto their user file
+                     user.addContactInfo(username, password, fullName, email, phoneNumber);
+
+                    //Adds a pop up that tells the user that the information has been added
+                    JOptionPane.showMessageDialog(contactInfoFrame, "Your contact information has been added.");
                     //Move to next window if login successful
                     //Pass username to be used in program as identifier of each user
                     GUI2 gui2 = new GUI2();
                     gui2.setVisible(true);
                     close();
+                }
             }
         });
     }
