@@ -12,8 +12,8 @@ public class GUI2 extends JFrame {
         // Initialize clothing list
         clothes = new ArrayList<>();
         // Add clothing items with actual image paths
-        clothes.add(new Clothing("T-Shirt", "Comfortable cotton t-shirt", 19.99, "path/to/tshirt.jpg"));
-        clothes.add(new Clothing("Jeans", "Stylish denim jeans", 39.99, "path/to/jeans.jpg"));
+        clothes.add(new Clothing("T-Shirt", "Comfortable cotton t-shirt", 19.99, "Screenshot (2).png", "large"));
+        clothes.add(new Clothing("Jeans", "Stylish denim jeans", 39.99, "Screenshot (2).png", "small"));
         // Add more clothing items as needed
 
         // Set up the main window
@@ -31,7 +31,7 @@ public class GUI2 extends JFrame {
         // Create the panel with GridBagLayout for clothing items
         clothingPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(10, 50, 10, 10);
         gbc.fill = GridBagConstraints.BOTH;
 
         // Create a panel for each clothing item

@@ -12,13 +12,15 @@ public class Clothing {
         condition = "";
         gender = "";
         size = "";
+        imagePath = "";
     }
 
-    public Clothing(String name, String condition, double price, String imagePath) {
+    public Clothing(String name, String condition, double price, String imagePath, String size) {
         this.name = name;
         this.condition = condition;
         this.price = price;
         this.imagePath = imagePath;
+        this.size = size;
     }
 
     public void setCondition(String c) {
