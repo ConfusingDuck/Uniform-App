@@ -33,10 +33,10 @@ public class ContactInfo{
 
 
     public ContactInfo(String username, String password) {
-
+        //Makes new contact info frame and panel
         contactInfoFrame = new JFrame();
         contactInfoPanel = new JPanel();
-
+        //Sets margins for the border
         contactInfoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         contactInfoPanel.setLayout(new GridBagLayout());
         //c determines where an object is within the gridBagLayout
@@ -57,6 +57,7 @@ public class ContactInfo{
         lblPhoneNumber = new JLabel("Enter Phone Number: ");
         confirmButton = new JButton("Confirm");
 
+        //Creating text fields that will take in a user input
         txtFullName = new JTextField(15);
         txtFullName.setMaximumSize(txtFullName.getPreferredSize());
         txtEmail = new JTextField(15);
@@ -84,15 +85,20 @@ public class ContactInfo{
         c.gridy = 3;
         contactInfoPanel.add(confirmButton, c);
 
+        //Making the confirm button have action when it is pressed
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Gets the text from the text boxes and holds it in their respective strings
                 fullName = txtFullName.getText();
                 email = txtEmail.getText();
                 phoneNumber = txtPhoneNumber.getText();
+                //Creates new user object
                 user = new User();
+                //Calls the addContactInfo method to add all of their info onto their user file
                 user.addContactInfo(username, password, fullName, email, phoneNumber);
 
+                //Adds a pop up that tells the user that the information has been added
                 JOptionPane.showMessageDialog(contactInfoFrame, "Your contact information has been added.");
                     //Move to next window if login successful
                     //Pass username to be used in program as identifier of each user
