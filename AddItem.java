@@ -30,9 +30,9 @@ public class AddItem extends JFrame {
     private JComboBox cmbGender;
     private JComboBox cmbSize;
 
-    private final String[] conditions = {"Heavily Worn", "Moderately Worn", "Lightly Worn", "New"};
-    private final String[] genders = {"Men's", "Women's"};
-    private final String[] sizes = {"XS", "S", "M", "L", "XL"};
+    private final String[] conditions = { "Heavily Worn", "Moderately Worn", "Lightly Worn", "New" };
+    private final String[] genders = { "Men's", "Women's" };
+    private final String[] sizes = { "XS", "S", "M", "L", "XL" };
 
     public AddItem() {
         frame = new JFrame();
@@ -40,18 +40,17 @@ public class AddItem extends JFrame {
 
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setLayout(new GridBagLayout());
-        //c determines where an object is within the gridBagLayout
+        // c determines where an object is within the gridBagLayout
         GridBagConstraints c = new GridBagConstraints();
-        //c is given insets to pad objects in the layout
+        // c is given insets to pad objects in the layout
         c.insets = new Insets(0, 5, 20, 0);
 
-        //Automatically close program when frame is closed.
+        // Automatically close program when frame is closed.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Uniform Marketplace");
         frame.setSize(800, 500);
         frame.setLocationRelativeTo(null);
         frame.add(panel);
-
 
         lblPrice = new JLabel("Set Your Price: $");
         lblCondition = new JLabel("Condition: ");

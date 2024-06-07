@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 
 public class GUI2 extends JFrame {
     private JFrame window;
@@ -73,12 +77,24 @@ public class GUI2 extends JFrame {
         gbc.gridy = 2;
         panel.add(priceLabel, gbc);
 
-        JLabel imageLabel = new JLabel(new ImageIcon(clothing.getImagePath()));
+        // Resize the image and add to JLabel
+        JLabel imageLabel = new JLabel(new ImageIcon(resizeImage(clothing.getImagePath(), 100, 100)));
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridheight = 3;
         panel.add(imageLabel, gbc);
 
         return panel;
+    }
+
+    private Image resizeImage(String imagePath, int width, int height) {
+        try {
+            BufferedImage originalImage = ImageIO.read(new File(imagePath));
+            Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return resizedImage;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

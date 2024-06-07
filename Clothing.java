@@ -57,6 +57,7 @@ public class Clothing {
 
     public String getImagePath() {
         return imagePath;
+
     }
 
     public String getName() {
