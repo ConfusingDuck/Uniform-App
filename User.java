@@ -50,7 +50,6 @@ public class User {
 		try {
 			FileWriter fw = new FileWriter(fileName, true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(password);
 			bw.newLine();
 			bw.write(fullName);
 			bw.newLine();
