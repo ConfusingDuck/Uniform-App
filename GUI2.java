@@ -6,11 +6,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.Color;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import javax.swing.BorderFactory;
 
 public class GUI2 extends JFrame {
     private JFrame window;
     private JPanel clothingPanel;
     private List<Clothing> clothes;
+    private JButton btnSweater;
+    private JButton btnShortSleeves;
+    private JButton btnLongSleeves;
+    private JButton btnPants;
+    private JButton btnAddItem;
 
     public GUI2() {
         // Initialize clothing list
@@ -31,6 +44,64 @@ public class GUI2 extends JFrame {
         JLabel titleLabel = new JLabel("Clothing Marketplace", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         window.add(titleLabel, BorderLayout.NORTH);
+
+        // Add buttons for types of clothing items
+        btnSweater = new JButton("Sweater");
+        btnShortSleeves = new JButton("Short Sleeve");
+        btnLongSleeves = new JButton("Long Sleeve");
+        btnPants = new JButton("Pants");
+
+        // Add button for adding clothing items
+        btnAddItem = new JButton("Add Item");
+
+        // Place each object in grid layout by giving x and y coordinates
+        // c determines where an object is within the gridBagLayout
+        GridBagConstraints c = new GridBagConstraints();
+        // c is given insets to pad objects in the layout
+        c.insets = new Insets(0, 5, 20, 0);
+        c.gridx = 0;
+        c.gridy = 0;
+        clothingPanel.add(btnSweater, c);
+
+        // Add action listener for sweater button
+        btnSweater.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        // Add action listener for short sleeve button
+        btnShortSleeves.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        // Add action listener for long sleeve button
+        btnLongSleeves.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        // Add action listener for pants button
+        btnPants.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        // Add action listener for add item button
+        btnAddItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
 
         // Create the panel with GridBagLayout for clothing items
         clothingPanel = new JPanel(new GridBagLayout());
