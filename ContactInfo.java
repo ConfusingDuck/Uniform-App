@@ -94,8 +94,16 @@ public class ContactInfo{
                 email = txtEmail.getText();
                 phoneNumber = txtPhoneNumber.getText();
 
+                boolean validName = false;
                 boolean validEmail = false;
                 boolean validPhoneNumber = false;
+
+                if (fullName.length() > 0 && fullName.contains(" ")) {
+                    validName = true;
+                }
+                else {
+                    JOptionPane.showMessageDialog(contactInfoFrame, "Invalid name.");
+                }
 
                 if (email.contains("@") && (email.contains(".com") || email.contains(".ca"))) {
                     validEmail = true;
@@ -118,7 +126,7 @@ public class ContactInfo{
                     }
                 }
 
-                if (validEmail && validPhoneNumber) {
+                if (validEmail && validPhoneNumber && validName) {
                     //Creates new user object
                     user = new User();
                     //Calls the addContactInfo method to add all of their info onto their user file
