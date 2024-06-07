@@ -139,7 +139,7 @@ public class ContactInfo{
                     JOptionPane.showMessageDialog(contactInfoFrame, "Your contact information has been added.");
                     //Move to next window if login successful
                     //Pass username to be used in program as identifier of each user
-                    GUI2 gui2 = new GUI2();
+                    GUI2 gui2 = new GUI2(username);
                     gui2.setVisible(true);
                     close();
                 }

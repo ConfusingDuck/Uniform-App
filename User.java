@@ -51,7 +51,6 @@ public class User {
 			FileWriter fw = new FileWriter(fileName, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.newLine();
-			bw.newLine();
 			bw.write(fullName);
 			bw.newLine();
 			bw.write(email);
