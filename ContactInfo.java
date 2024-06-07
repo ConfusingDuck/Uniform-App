@@ -125,9 +125,6 @@ public class ContactInfo{
                         }
                     }
                 }
-                else {
-                    JOptionPane.showMessageDialog(contactInfoFrame, "Invalid phone number.");
-                }
 
                 if (validEmail && validPhoneNumber && validName) {
                     //Creates new user object
