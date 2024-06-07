@@ -25,7 +25,7 @@ public class GUI2 extends JFrame {
     private JButton btnPants;
     private JButton btnAddItem;
 
-    public GUI2() {
+    public GUI2(String username) {
         // Initialize clothing list
         clothes = new ArrayList<>();
         // Add clothing items with actual image paths
