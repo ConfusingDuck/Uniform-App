@@ -12,7 +12,10 @@ public class App {
         } catch (Exception e) {
         }
 
-        GUI gui = new GUI();
-        gui.show();
+        //GUI gui = new GUI();
+        //gui.show();
+
+        AddItem itemBoard = new AddItem();
+        itemBoard.show();
     }
 }
