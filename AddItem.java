@@ -47,6 +47,7 @@ public class AddItem extends JFrame {
     private String strPrice;
     private boolean validPrice;
 
+    //Make lists of all available options for each combo box
     private final String[] conditions = {" ", "Heavily Worn", "Moderately Worn", "Lightly Worn", "New"};
     private final String[] genders = {" ", "Men's", "Women's"};
     private final String[] sizes = {" ", "XS", "S", "M", "L", "XL"};
@@ -73,7 +74,7 @@ public class AddItem extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
-
+        //Initialize all the labels and boxes
         lblItem = new JLabel("Pick the type of item:");
         lblPrice = new JLabel("Set Your Price: $");
         lblCondition = new JLabel("Condition:");
@@ -125,7 +126,7 @@ public class AddItem extends JFrame {
         panel.add(btnAdd, c);
 
 
-        
+        //Give each label and box a font
         lblPrice.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         lblCondition.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         lblGender.setFont(new Font("Sans-serif", Font.PLAIN, 16));
@@ -141,40 +142,49 @@ public class AddItem extends JFrame {
         btnAdd.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         btnUpload.setFont(new Font("Sans-serif", Font.PLAIN, 16));
 
+        //Add an actionListener for the upload picture button
         btnUpload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Opens the computer's file directory so user can browse
                 fcUpload = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
                 int x = fcUpload.showOpenDialog(null);
+                //If the user selects an image, then the file path is obtained and stored in imagePath
                 if (x == JFileChooser.APPROVE_OPTION) {
                     imagePath = fcUpload.getSelectedFile().getAbsolutePath();
                 }
+                //Otherwise, nothing happens and the window closes
                 else {}
             }
         });
 
+        //Add an actionListener for the button to add a new item
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 strPrice = txtPrice.getText();
-                
+                //Check the price text box to ensure that only digits and decimal points can be added
                 for (int i = 0; i < strPrice.length(); i++) {
                     if ((int) strPrice.charAt(i) >= 48 && (int) strPrice.charAt(i) <= 57 || strPrice.charAt(i) == 46) {
                         if (i == 9) {
+                            //If the string only contains digits and a decimal point, then the price can be made a double
                             price = Double.valueOf(strPrice);
                             validPrice = true;
                         }
                     }
                     else {
+                        //Otherwise, price is false and the user is notified
                         validPrice = false;
                         JOptionPane.showMessageDialog(frame, "Invalid price.");
                         break;
                     }
                 }
+                //Gather all the specifics from the user's entry
                 condition = cmbCondition.getSelectedItem().toString();
                 gender = cmbGender.getSelectedItem().toString();
                 size = cmbSize.getSelectedItem().toString();
                 item = cmbItem.getSelectedItem().toString();
+                //If the inputted fields are not spaces (default value), then the submission is valid
                 if(!condition.equals(" ") || !gender.equals(" ") || !size.equals(" ") || !item.equals(" ") || !imagePath.equals(" ") || validPrice == false) {
                     JOptionPane.showMessageDialog(frame, "Invalid submission.");
                 }
@@ -187,10 +197,12 @@ public class AddItem extends JFrame {
 
     }
 
+    /*This method makes the pane visible */
     public void show() {
         frame.setVisible(true);
     }
 
+    /*This method closes the pane */
     public void close() {
         frame.setVisible(false);
     }
