@@ -4,16 +4,19 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class User {
 	String username;
 	String password;
 	String fileName;
+	ArrayList<Clothing> clothingItems;
 
 	public User() {
 		username = "";
 		password = "";
 		fileName = "";
+		clothingItems = new ArrayList<Clothing>();
 	}
 
 	public int signUp(String user, String pswd) {
@@ -80,6 +83,14 @@ public class User {
 		}
 		// Returns false if true is not returned
 		return false;
+	}
+
+	public void setClothingItem(Clothing item) {
+		clothingItems.add(item);
+	}
+
+	public ArrayList<Clothing> getClothingItems() {
+		return clothingItems;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
@@ -13,8 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
 
 public class AddItem extends JFrame {
     private JFrame frame;
@@ -32,19 +34,24 @@ public class AddItem extends JFrame {
     private JComboBox cmbSize;
     private JComboBox cmbItem;
 
+    private JFileChooser fcUpload;
+    private JButton btnUpload;
+    private JButton btnAdd;
+
+    private double price;
+    private String condition;
+    private String gender;
+    private String size;
+    private String item;
+    private String imagePath;
+
     private final String[] conditions = {" ", "Heavily Worn", "Moderately Worn", "Lightly Worn", "New"};
     private final String[] genders = {" ", "Men's", "Women's"};
     private final String[] sizes = {" ", "XS", "S", "M", "L", "XL"};
     private final String[] items = {" ", "Short-Sleeve Polo", "Long-Sleeve Polo", "Sweater", "Pants"};
 
-<<<<<<< Updated upstream
-    private final String[] conditions = { "Heavily Worn", "Moderately Worn", "Lightly Worn", "New" };
-    private final String[] genders = { "Men's", "Women's" };
-    private final String[] sizes = { "XS", "S", "M", "L", "XL" };
-=======
->>>>>>> Stashed changes
-
-    public AddItem() {
+    public AddItem(User user) {
+        imagePath = " ";
         frame = new JFrame();
         panel = new JPanel();
 
@@ -62,10 +69,8 @@ public class AddItem extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
-<<<<<<< Updated upstream
-=======
+
         lblItem = new JLabel("Pick the type of item:");
->>>>>>> Stashed changes
         lblPrice = new JLabel("Set Your Price: $");
         lblCondition = new JLabel("Condition:");
         lblGender = new JLabel("Gender:");
@@ -77,34 +82,91 @@ public class AddItem extends JFrame {
         cmbSize = new JComboBox<>(sizes);
         cmbItem = new JComboBox<>(items);
 
+        fcUpload = new JFileChooser();
+        btnUpload = new JButton("Upload Picture");
+        btnAdd = new JButton("Add Item");
+
         //Add all the labels and boxes to the panel.
+        c.anchor = GridBagConstraints.EAST;
+        c.weightx = 1;
+        c.insets = new Insets(5, 5, 5, 5);
         c.gridx = 0;
         c.gridy = 0;
-        panel.add(lblPrice, c);
+        panel.add(lblItem, c);
         c.gridy = 1;
         panel.add(lblCondition, c);
         c.gridy = 2;
         panel.add(lblGender, c);
         c.gridy = 3;
         panel.add(lblSize, c);
+        c.gridy = 4;
+        panel.add(lblPrice, c);
+        c.gridy = 5;
+        panel.add(btnUpload, c);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.WEST;
         c.gridx = 1;
+        c.gridy = 4;
+        panel.add(txtPrice, c);
+        c.gridy = 3;
         panel.add(cmbSize, c);
         c.gridy = 2;
         panel.add(cmbGender, c);
         c.gridy = 1;
         panel.add(cmbCondition, c);
         c.gridy = 0;
-        panel.add(txtPrice, c);
+        panel.add(cmbItem, c);
+        c.gridy = 5;
+        panel.add(btnAdd, c);
+
+
         
         lblPrice.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         lblCondition.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         lblGender.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         lblSize.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+        lblItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
 
         txtPrice.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         cmbCondition.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         cmbGender.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         cmbSize.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+        cmbItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+
+        btnAdd.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+        btnUpload.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+
+        btnUpload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fcUpload = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                int x = fcUpload.showOpenDialog(null);
+                if (x == JFileChooser.APPROVE_OPTION) {
+                    imagePath = fcUpload.getSelectedFile().getAbsolutePath();
+                }
+                else {}
+            }
+        });
+
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                //Make sure price is of double type and has no other characters to not throw error
+                price = Double.valueOf(txtPrice.getText());
+                condition = cmbCondition.getSelectedItem().toString();
+                gender = cmbGender.getSelectedItem().toString();
+                size = cmbSize.getSelectedItem().toString();
+                item = cmbItem.getSelectedItem().toString();
+                if(!condition.equals(" ") && !gender.equals(" ") && !size.equals(" ") && !item.equals(" ") && !imagePath.equals(" ")) {
+                    user.setClothingItem(new Clothing(item, condition, price, imagePath, size));
+                }
+                else {
+                    JOptionPane.showMessageDialog(frame, "Invalid submission.");
+                }
+            }
+        });
 
 
     }

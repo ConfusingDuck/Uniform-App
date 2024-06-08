@@ -13,6 +13,7 @@ public class Clothing {
         gender = "";
         size = "";
         imagePath = "";
+        name = "";
     }
 
     public Clothing(String name, String condition, double price, String imagePath, String size) {
@@ -37,6 +38,14 @@ public class Clothing {
 
     public void setSize(String s) {
         size = s;
+    }
+
+    public void setImagePath(String i) {
+        imagePath = i;
+    }
+
+    public void setName(String n) {
+        name = n;
     }
 
     public String getCondition() {
