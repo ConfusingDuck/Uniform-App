@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,14 +13,18 @@ public class GUI2 extends JFrame {
     private JFrame window;
     private JPanel clothingPanel;
     private List<Clothing> clothes;
+    private List<Clothing> allClothes; // To keep all clothing items for filtering
 
     public GUI2(String username) {
-        // Initialize clothing list
+        // Initialize clothing lists
         clothes = new ArrayList<>();
+        allClothes = new ArrayList<>();
         // Add clothing items with actual image paths
-        clothes.add(new Clothing("T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large"));
-        clothes.add(new Clothing("Jeans", "Brand-new", 39.99, "jeans example.png", "small"));
+        allClothes.add(new Clothing("T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large"));
+        allClothes.add(new Clothing("Jeans", "Brand-new", 39.99, "jeans example.png", "small"));
         // Add more clothing items as needed
+
+        clothes.addAll(allClothes);
 
         // Set up the main window
         window = new JFrame("Clothing Marketplace");
@@ -27,10 +33,33 @@ public class GUI2 extends JFrame {
         window.setLocationRelativeTo(null);
         window.setLayout(new BorderLayout());
 
+        // Add a panel for the title and buttons
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+
         // Add a title label
         JLabel titleLabel = new JLabel("Clothing Marketplace", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        window.add(titleLabel, BorderLayout.NORTH);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        topPanel.add(titleLabel);
+
+        // Add filter buttons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
+
+        JButton shortSleevesButton = new JButton("Short Sleeves");
+        JButton longSleevesButton = new JButton("Long Sleeves");
+        JButton sweaterButton = new JButton("Sweater");
+        JButton pantsButton = new JButton("Pants");
+
+        buttonPanel.add(shortSleevesButton);
+        buttonPanel.add(longSleevesButton);
+        buttonPanel.add(sweaterButton);
+        buttonPanel.add(pantsButton);
+
+        topPanel.add(buttonPanel);
+
+        window.add(topPanel, BorderLayout.NORTH);
 
         // Create the panel with GridBagLayout for clothing items
         clothingPanel = new JPanel(new GridBagLayout());
@@ -39,6 +68,28 @@ public class GUI2 extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
 
         // Create a panel for each clothing item
+        populateClothingPanel();
+
+        // Add a scroll pane to the clothing panel
+        JScrollPane scrollPane = new JScrollPane(clothingPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        window.add(scrollPane, BorderLayout.CENTER);
+
+        // Add action listeners to buttons
+        shortSleevesButton.addActionListener(e -> filterClothing("Short Sleeves"));
+        longSleevesButton.addActionListener(e -> filterClothing("Long Sleeves"));
+        sweaterButton.addActionListener(e -> filterClothing("Sweater"));
+        pantsButton.addActionListener(e -> filterClothing("Pants"));
+
+        window.setVisible(true);
+    }
+
+    private void populateClothingPanel() {
+        clothingPanel.removeAll();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 50, 10, 10);
+        gbc.fill = GridBagConstraints.BOTH;
+
         int row = 0;
         for (Clothing clothing : clothes) {
             gbc.gridx = 0;
@@ -46,13 +97,18 @@ public class GUI2 extends JFrame {
             clothingPanel.add(createClothingPanel(clothing), gbc);
             row++;
         }
+        clothingPanel.revalidate();
+        clothingPanel.repaint();
+    }
 
-        // Add a scroll pane to the clothing panel
-        JScrollPane scrollPane = new JScrollPane(clothingPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        window.add(scrollPane, BorderLayout.CENTER);
-
-        window.setVisible(true);
+    private void filterClothing(String filter) {
+        clothes.clear();
+        for (Clothing clothing : allClothes) {
+            if (clothing.getName().equalsIgnoreCase(filter)) {
+                clothes.add(clothing);
+            }
+        }
+        populateClothingPanel();
     }
 
     private JPanel createClothingPanel(Clothing clothing) {
