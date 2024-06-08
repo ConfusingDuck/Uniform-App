@@ -154,4 +154,12 @@ public class GUI2 extends JFrame {
         }
     }
 
+    public void show() {
+        window.setVisible(true);
+    }
+
+    public void close() {
+        window.setVisible(false);
+    }
+
 }

@@ -133,7 +133,7 @@ public class ContactInfo{
                     //Creates new user object
                     user = new User();
                     //Calls the addContactInfo method to add all of their info onto their user file
-                     user.addContactInfo(username, password, fullName, email, phoneNumber);
+                    user.addContactInfo(username, password, fullName, email, phoneNumber);
 
                     //Adds a pop up that tells the user that the information has been added
                     JOptionPane.showMessageDialog(contactInfoFrame, "Your contact information has been added.");
