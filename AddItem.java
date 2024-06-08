@@ -44,6 +44,8 @@ public class AddItem extends JFrame {
     private String size;
     private String item;
     private String imagePath;
+    private String strPrice;
+    private boolean validPrice;
 
     private final String[] conditions = {" ", "Heavily Worn", "Moderately Worn", "Lightly Worn", "New"};
     private final String[] genders = {" ", "Men's", "Women's"};
@@ -52,6 +54,8 @@ public class AddItem extends JFrame {
 
     public AddItem(User user) {
         imagePath = " ";
+        strPrice = "";
+        validPrice = false;
         frame = new JFrame();
         panel = new JPanel();
 
@@ -152,18 +156,30 @@ public class AddItem extends JFrame {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                //Make sure price is of double type and has no other characters to not throw error
-                price = Double.valueOf(txtPrice.getText());
+                strPrice = txtPrice.getText();
+                
+                for (int i = 0; i < strPrice.length(); i++) {
+                    if ((int) strPrice.charAt(i) >= 48 && (int) strPrice.charAt(i) <= 57 || strPrice.charAt(i) == 46) {
+                        if (i == 9) {
+                            price = Double.valueOf(strPrice);
+                            validPrice = true;
+                        }
+                    }
+                    else {
+                        validPrice = false;
+                        JOptionPane.showMessageDialog(frame, "Invalid price.");
+                        break;
+                    }
+                }
                 condition = cmbCondition.getSelectedItem().toString();
                 gender = cmbGender.getSelectedItem().toString();
                 size = cmbSize.getSelectedItem().toString();
                 item = cmbItem.getSelectedItem().toString();
-                if(!condition.equals(" ") && !gender.equals(" ") && !size.equals(" ") && !item.equals(" ") && !imagePath.equals(" ")) {
-                    user.setClothingItem(new Clothing(item, condition, price, imagePath, size));
+                if(!condition.equals(" ") || !gender.equals(" ") || !size.equals(" ") || !item.equals(" ") || !imagePath.equals(" ") || validPrice == false) {
+                    JOptionPane.showMessageDialog(frame, "Invalid submission.");
                 }
                 else {
-                    JOptionPane.showMessageDialog(frame, "Invalid submission.");
+                    user.setClothingItem(new Clothing(item, condition, price, imagePath, size));
                 }
             }
         });
