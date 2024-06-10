@@ -190,6 +190,7 @@ public class AddItem extends JFrame {
                 }
                 else {
                     user.setClothingItem(new Clothing(item, condition, price, imagePath, size));
+                    close();
                 }
             }
         });

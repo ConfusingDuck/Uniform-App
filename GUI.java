@@ -92,7 +92,7 @@ public class GUI {
                     JOptionPane.showMessageDialog(frame, "You are logged in.");
                     // Move to next window if login successful
                     // Pass username to be used in program as identifier of each user
-                    GUI2 gui2 = new GUI2(username);
+                    GUI2 gui2 = new GUI2(username, user);
                     gui2.show();
                     close();
                 } else {

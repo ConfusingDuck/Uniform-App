@@ -12,10 +12,12 @@ import javax.imageio.ImageIO;
 public class GUI2 extends JFrame {
     private JFrame window;
     private JPanel clothingPanel;
+    private JPanel addItemPanel;
     private List<Clothing> clothes;
     private List<Clothing> allClothes; // To keep all clothing items for filtering
+    private JButton btnAddItem;
 
-    public GUI2(String username) {
+    public GUI2(String username, User user) {
         // Initialize clothing lists
         clothes = new ArrayList<>();
         allClothes = new ArrayList<>();
@@ -32,6 +34,14 @@ public class GUI2 extends JFrame {
         window.setSize(1500, 1000);
         window.setLocationRelativeTo(null);
         window.setLayout(new BorderLayout());
+
+        //Add a panel at the bottom to hold the new item button
+        addItemPanel = new JPanel();
+        addItemPanel.setLayout(new BorderLayout());
+        btnAddItem = new JButton("Add New Item");
+        btnAddItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+        addItemPanel.add(btnAddItem);
+        window.add(addItemPanel, BorderLayout.SOUTH);
 
         // Add a panel for the title and buttons
         JPanel topPanel = new JPanel();
@@ -82,6 +92,16 @@ public class GUI2 extends JFrame {
         pantsButton.addActionListener(e -> filterClothing("Pants"));
 
         window.setVisible(true);
+
+        //Add action listener to the btnAddItem button
+        btnAddItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddItem addItemWindow = new AddItem(user);
+                addItemWindow.show();
+            }
+        });
+        
     }
 
     private void populateClothingPanel() {
