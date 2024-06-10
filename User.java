@@ -19,6 +19,10 @@ public class User {
 		clothingItems = new ArrayList<Clothing>();
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
 	public int signUp(String user, String pswd) {
 		// The file name will be the username
 		fileName = user + ".txt";
