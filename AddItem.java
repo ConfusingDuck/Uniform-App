@@ -162,9 +162,10 @@ public class AddItem extends JFrame {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 strPrice = txtPrice.getText();
                 //Check the price text box to ensure that only digits and decimal points can be added
-                validPrice = true;
+                validPrice = strPrice.length() > 0;
                 for (int i = 0; i < strPrice.length(); i++) {
                     if ((int) strPrice.charAt(i) >= 48 && (int) strPrice.charAt(i) <= 57 || strPrice.charAt(i) == 46) {
                     }
