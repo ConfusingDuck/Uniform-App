@@ -112,13 +112,18 @@ public class Clothing {
                 last = line;
             }
             br.close();
-            String[] words = last.split("|");
-            if (words.length != 7) {
+            if (last.equals("")) {
                 return 0;
             }
             else {
-                return (Integer.parseInt(words[1]));
-            }
+                String[] words = last.split("|");
+                if (words.length != 7) {
+                    return 0;
+                }
+                else {
+                    return (Integer.parseInt(words[1]));
+                }
+            }  
         }
         catch(IOException e) {     
         }
