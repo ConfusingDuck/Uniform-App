@@ -14,10 +14,12 @@ public class FileEditor {
         }
     }
 
-    public static void addClothing(User user){
+    public static void addClothing(User user, Clothing clothing){
         try {
-            FileWriter fw = new FileWriter(user.getUsername() + ".txt");
-            
+            FileWriter fw = new FileWriter(user.getUsername() + ".txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.newLine();
+            bw.write()
         }
         catch (IOException e) {
         }
