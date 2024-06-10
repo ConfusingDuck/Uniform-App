@@ -56,7 +56,7 @@ public class AddItem extends JFrame {
     public AddItem(User user) {
         imagePath = " ";
         strPrice = "";
-        validPrice = false;
+        validPrice = true;
         frame = new JFrame();
         panel = new JPanel();
 
@@ -164,13 +164,9 @@ public class AddItem extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 strPrice = txtPrice.getText();
                 //Check the price text box to ensure that only digits and decimal points can be added
+                validPrice = true;
                 for (int i = 0; i < strPrice.length(); i++) {
                     if ((int) strPrice.charAt(i) >= 48 && (int) strPrice.charAt(i) <= 57 || strPrice.charAt(i) == 46) {
-                        if (i == 9) {
-                            //If the string only contains digits and a decimal point, then the price can be made a double
-                            price = Double.valueOf(strPrice);
-                            validPrice = true;
-                        }
                     }
                     else {
                         //Otherwise, price is false and the user is notified
@@ -179,13 +175,17 @@ public class AddItem extends JFrame {
                         break;
                     }
                 }
+                if (validPrice) {
+                    //If the string only contains digits and a decimal point, then the price can be made a double
+                    price = Double.valueOf(strPrice);
+                }
                 //Gather all the specifics from the user's entry
                 condition = cmbCondition.getSelectedItem().toString();
                 gender = cmbGender.getSelectedItem().toString();
                 size = cmbSize.getSelectedItem().toString();
                 item = cmbItem.getSelectedItem().toString();
                 //If the inputted fields are not spaces (default value), then the submission is valid
-                if(!condition.equals(" ") || !gender.equals(" ") || !size.equals(" ") || !item.equals(" ") || !imagePath.equals(" ") || validPrice == false) {
+                if(condition.equals(" ") || gender.equals(" ") || size.equals(" ") || item.equals(" ") || validPrice == false) {
                     JOptionPane.showMessageDialog(frame, "Invalid submission.");
                 }
                 else {
