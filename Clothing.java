@@ -6,6 +6,7 @@ public class Clothing {
     private String rPrice;
     private String imagePath;
     private String name;
+    private String username;
 
     public static int binNumber = 0;
 
@@ -16,9 +17,11 @@ public class Clothing {
         size = "";
         imagePath = "";
         name = "";
+        username = "";
     }
 
-    public Clothing(String name, String condition, double price, String imagePath, String size) {
+    public Clothing(String username, String name, String condition, double price, String imagePath, String size) {
+        this.username = username;
         this.name = name;
         this.condition = condition;
         this.price = price;
@@ -85,6 +88,6 @@ public class Clothing {
 
     public String toString() {
         rPrice = String.format("%.2f", price);
-        return (binNumber + "|" + name + "|" + condition + "|" + size + "|" + condition + "|" + rPrice);
+        return (username + "|" + binNumber + "|" + name + "|" + condition + "|" + size + "|" + condition + "|" + rPrice);
     }
 }

@@ -190,7 +190,7 @@ public class AddItem extends JFrame {
                     JOptionPane.showMessageDialog(frame, "Invalid submission.");
                 }
                 else {
-                    user.setClothingItem(new Clothing(item, condition, price, imagePath, size));
+                    user.setClothingItem(new Clothing(user.getUsername(), item, condition, price, imagePath, size));
                     close();
                 }
             }
