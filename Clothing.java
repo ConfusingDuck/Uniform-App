@@ -7,6 +7,8 @@ public class Clothing {
     private String imagePath;
     private String name;
 
+    public static int binNumber = 0;
+
     public Clothing() {
         price = 0;
         condition = "";
@@ -22,6 +24,10 @@ public class Clothing {
         this.price = price;
         this.imagePath = imagePath;
         this.size = size;
+    }
+
+    public void newBinNumber() {
+        binNumber++;
     }
 
     public void setCondition(String c) {
@@ -46,6 +52,10 @@ public class Clothing {
 
     public void setName(String n) {
         name = n;
+    }
+
+    public int getBinNumber() {
+        return binNumber;
     }
 
     public String getCondition() {
@@ -75,6 +85,6 @@ public class Clothing {
 
     public String toString() {
         rPrice = String.format("%.2f", price);
-        return ("Gender: " + gender + "\nSize: " + size + "\nCondition: " + condition + "\nPrice: " + rPrice);
+        return (binNumber + "|" + name + "|" + condition + "|" + size + "|" + condition + "|" + rPrice);
     }
 }

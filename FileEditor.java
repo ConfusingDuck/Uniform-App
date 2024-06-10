@@ -19,7 +19,8 @@ public class FileEditor {
             FileWriter fw = new FileWriter(user.getUsername() + ".txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.newLine();
-            bw.write()
+            bw.write(" ");
+            bw.close();
         }
         catch (IOException e) {
         }
