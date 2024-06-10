@@ -191,6 +191,7 @@ public class AddItem extends JFrame {
                 }
                 else {
                     user.setClothingItem(new Clothing(user.getUsername(), item, condition, price, imagePath, size));
+                    FileEditor.storeClothingItem(new Clothing(user.getUsername(), item, condition, price, imagePath, size));
                     close();
                 }
             }
