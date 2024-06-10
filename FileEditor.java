@@ -2,27 +2,51 @@ import java.io.*;
 
 public class FileEditor {
     
-    public static void addUser(User user) {
+    public static void storeClothingItem(Clothing clothing){
         try {
-            FileWriter fw = new FileWriter("usernames.txt", true);
+            FileWriter fw = new FileWriter("clothingList.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.newLine();
-            bw.write(user.getUsername() + ".txt");
+            bw.write(clothing.toString());
             bw.close();
         }
         catch (IOException e) {
         }
     }
 
-    public static void addClothing(User user, Clothing clothing){
-        try {
-            FileWriter fw = new FileWriter(user.getUsername() + ".txt", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.newLine();
-            bw.write(" ");
-            bw.close();
+    public static Clothing retreiveByBin(String binNum) {
+        String line = " ";
+        try{
+            FileReader fr = new FileReader("clothingList.txt");
+            BufferedReader br = new BufferedReader(fr);
+            while ((line = br.readLine()) != null) {
+                if (line.contains(binNum)) {
+                    Clothing clothing = new Clothing(line);
+                    return clothing;
+                }
+            }
         }
-        catch (IOException e) {
+        catch(IOException e) {
         }
+        Clothing clothing = new Clothing();
+        return clothing;
+    }
+
+    public static Clothing retreiveByFilter(String filter) {
+        String line = " ";
+        try{
+            FileReader fr = new FileReader("clothingList.txt");
+            BufferedReader br = new BufferedReader(fr);
+            while ((line = br.readLine()) != null) {
+                if (line.contains(filter)) {
+                    Clothing clothing = new Clothing(line);
+                    return clothing;
+                }
+            }
+        }
+        catch(IOException e) {
+        }
+        Clothing clothing = new Clothing();
+        return clothing;
     }
 }

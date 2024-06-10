@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class Clothing {
     private double price;
     private String condition;
@@ -7,8 +9,8 @@ public class Clothing {
     private String imagePath;
     private String name;
     private String username;
+    private int binNum;
 
-    public static int binNumber = 0;
 
     public Clothing() {
         price = 0;
@@ -18,9 +20,23 @@ public class Clothing {
         imagePath = "";
         name = "";
         username = "";
+        binNum = getLatestBinNum() + 1;
     }
 
+    public Clothing(String dataLine) {
+        String[] words = dataLine.split("|");
+        init(words[0], words[1], words[2], Double.valueOf(words[3]), words[4], words[5]);
+        binNum = getLatestBinNum() + 1;
+    }
+
+//Find a way to add bin number and make it increase by 1 each time an item is added
+
     public Clothing(String username, String name, String condition, double price, String imagePath, String size) {
+        init(username, name, condition, price, imagePath, size);
+        binNum = getLatestBinNum() + 1;
+    }
+
+    private void init(String username, String name, String condition, double price, String imagePath, String size) {
         this.username = username;
         this.name = name;
         this.condition = condition;
@@ -29,8 +45,8 @@ public class Clothing {
         this.size = size;
     }
 
-    public void newBinNumber() {
-        binNumber++;
+    public void setUsername(String u) {
+        username = u;
     }
 
     public void setCondition(String c) {
@@ -57,8 +73,8 @@ public class Clothing {
         name = n;
     }
 
-    public int getBinNumber() {
-        return binNumber;
+    public String getUsername() {
+        return username;
     }
 
     public String getCondition() {
@@ -86,8 +102,31 @@ public class Clothing {
         return name;
     }
 
+    public int getLatestBinNum(){
+        try {
+            FileReader fr = new FileReader("clothingList.txt");
+            BufferedReader br = new BufferedReader(fr);
+
+            String last = "", line = "";
+            while ((line = br.readLine()) != null) { 
+                last = line;
+            }
+            br.close();
+            String[] words = last.split("|");
+            if (words.length != 7) {
+                return 0;
+            }
+            else {
+                return (Integer.parseInt(words[1]));
+            }
+        }
+        catch(IOException e) {     
+        }
+        return 0;
+    }
+
     public String toString() {
         rPrice = String.format("%.2f", price);
-        return (username + "|" + binNumber + "|" + name + "|" + condition + "|" + size + "|" + condition + "|" + rPrice);
+        return (username + "|" + name + "|" + condition + "|" + rPrice + "|" + imagePath + "|" + size + "|" + binNum);
     }
 }
