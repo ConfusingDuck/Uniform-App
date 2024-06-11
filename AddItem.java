@@ -191,11 +191,12 @@ public class AddItem extends JFrame {
                         || validPrice == false) {
                     JOptionPane.showMessageDialog(frame, "Invalid submission.");
                 } else {
-                    user.setClothingItem(new Clothing(
-                            user.getUsername(), item, condition, price, imagePath, size, gender));
-                    FileEditor.storeClothingItem(
-                            new Clothing(user.getUsername(), item, condition, price, imagePath, size, gender));
+                    Clothing clothing = new Clothing(user.getUsername(), item, condition, price, imagePath, size, gender);
+                    user.setClothingItem(clothing);
+                    FileEditor.storeClothingItem(clothing);
+                    FileEditor.storePicture(clothing);
                     close();
+
                 }
             }
         });

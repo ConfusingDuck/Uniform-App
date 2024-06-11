@@ -98,11 +98,14 @@ public class Clothing {
 
     public String getImagePath() {
         return imagePath;
-
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getBinNum() {
+        return binNum;
     }
 
     public int getLatestBinNum() {

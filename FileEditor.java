@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class FileEditor {
     
@@ -15,6 +17,27 @@ public class FileEditor {
         }
         catch (IOException e) {
         }
+    }
+
+    public static void storePicture(Clothing clothing) {
+        try {
+                BufferedImage bi;
+                bi = ImageIO.read(new File(clothing.getImagePath()));
+                File storedImage = new File(clothing.getBinNum() + ".png");
+                ImageIO.write(bi, "png", storedImage);
+                clothing.setImagePath(clothing.getBinNum() + ".png");
+            }
+            catch (IOException e) {
+                try {
+                    BufferedImage bi;
+                    bi = ImageIO.read(new File("jeans example.png"));
+                    File storedImage = new File(clothing.getBinNum() + ".png");
+                    ImageIO.write(bi, "png", storedImage);
+                    clothing.setImagePath("jeans example.png");
+                }
+                catch(IOException u) {
+                }
+            }
     }
 
     /*This method searches the file for a specific clothing item by its unique bin number */
