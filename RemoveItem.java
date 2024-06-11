@@ -50,30 +50,38 @@ public class RemoveItem {
         // Automatically close program when frame is closed.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Uniform Marketplace");
-        frame.setSize(500, 300);
+        frame.setSize(700, 400);
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
         lblBinNum = new JLabel("Enter the bin number of the item you want to remove:");
         txtBinNum = new JTextField(3);
-        lblBinNum = new JLabel("Enter password for confirmation: ");
+        lblPassword = new JLabel("Enter password for confirmation: ");
         pfPassword = new JPasswordField(10);
         btnRemove = new JButton("Remove listed item");
         lblBinNum.setFont(new Font("Sans'serif", Font.PLAIN, 16));
         lblPassword.setFont(new Font("Sans'serif", Font.PLAIN, 16));
         btnRemove.setFont(new Font("Sans'serif", Font.PLAIN, 16));
 
+        c.anchor = GridBagConstraints.EAST;
+        c.weightx = 1;
+        c.insets = new Insets(5, 5, 5, 5);
         c.gridx = 0;
         c.gridy = 0;
         panel.add(lblBinNum, c);
-        c.gridx = 1;
-        panel.add(txtBinNum, c);
         c.gridy = 1;
-        panel.add(pfPassword, c);
-        c.gridx = 0;
         panel.add(lblPassword, c);
         c.gridy = 2;
         panel.add(btnRemove, c);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.WEST;
+        c.gridx = 1;
+        c.gridy = 0;
+        panel.add(txtBinNum, c);
+        c.gridy = 1;
+        panel.add(pfPassword, c);
+
 
         btnRemove.addActionListener(new ActionListener() {
             @Override
@@ -95,16 +103,17 @@ public class RemoveItem {
                 // Password field return an array of chars, which we convert to a string
                 password = String.valueOf(pf);
 
-                if (validBin) {
-                    if (user.getPassword().equals(password)) {
+                if (user.getPassword().equals(password)) {
+                    if (validBin) {
                         FileEditor.removeByBin(strBin);
                         close();
                     }
-                    else {
-                        JOptionPane.showMessageDialog(frame, "Incorrect password.");
-                    }
-                    
                 }
+                else {
+                    JOptionPane.showMessageDialog(frame, "Incorrect password.");
+                }
+
+                
             }
         });
     }
