@@ -16,14 +16,15 @@ public class GUI2 extends JFrame {
     private List<Clothing> clothes;
     private List<Clothing> allClothes;
     private JButton btnAddItem;
+    private JButton btnRemoveItem;
 
     public GUI2(String username, User user) {
         // Initialize clothing lists
         clothes = new ArrayList<>();
         allClothes = new ArrayList<>();
         // Add clothing items with actual image paths
-        allClothes.add(new Clothing("T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large", "men"));
-        allClothes.add(new Clothing("Jeans", "Brand-new", 39.99, "jeans example.png", "small", "women"));
+        allClothes.add(new Clothing(username, "T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large", "men"));
+        allClothes.add(new Clothing(username, "Jeans", "Brand-new", 39.99, "jeans example.png", "small", "women"));
         // Add more clothing items as needed
 
         clothes.addAll(allClothes);
@@ -40,6 +41,9 @@ public class GUI2 extends JFrame {
         btnAddItem = new JButton("Add New Item");
         btnAddItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         addItemPanel.add(btnAddItem);
+        btnRemoveItem = new JButton("Remove Item");
+        btnRemoveItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+        addItemPanel.add(btnRemoveItem);
         window.add(addItemPanel, BorderLayout.SOUTH);
 
         // Add a panel for the title and buttons
