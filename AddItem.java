@@ -67,8 +67,6 @@ public class AddItem extends JFrame {
         // c is given insets to pad objects in the layout
         c.insets = new Insets(0, 5, 20, 0);
 
-        // Automatically close program when frame is closed.
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Uniform Marketplace");
         frame.setSize(800, 500);
         frame.setLocationRelativeTo(null);
@@ -193,7 +191,8 @@ public class AddItem extends JFrame {
                         || validPrice == false) {
                     JOptionPane.showMessageDialog(frame, "Invalid submission.");
                 } else {
-                    user.setClothingItem(new Clothing(user.getUsername(), item, condition, price, imagePath, size, gender));
+                    user.setClothingItem(new Clothing(
+                            user.getUsername(), item, condition, price, imagePath, size, gender));
                     FileEditor.storeClothingItem(
                             new Clothing(user.getUsername(), item, condition, price, imagePath, size, gender));
                     close();

@@ -31,7 +31,7 @@ public class RemoveItem {
     private String password;
     private char[] pf;
 
-    //Add password box
+    // Add password box
 
     public RemoveItem(User user) {
         validBin = true;
@@ -48,7 +48,6 @@ public class RemoveItem {
         c.insets = new Insets(0, 5, 20, 0);
 
         // Automatically close program when frame is closed.
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Uniform Marketplace");
         frame.setSize(700, 400);
         frame.setLocationRelativeTo(null);
@@ -82,18 +81,17 @@ public class RemoveItem {
         c.gridy = 1;
         panel.add(pfPassword, c);
 
-
         btnRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 strBin = txtBinNum.getText();
-                //Check the price text box to ensure that only digits and decimal points can be added
+                // Check the price text box to ensure that only digits and decimal points can be
+                // added
                 validBin = strBin.length() > 0;
                 for (int i = 0; i < strBin.length(); i++) {
                     if ((int) strBin.charAt(i) >= 48 && (int) strBin.charAt(i) <= 57) {
-                    }
-                    else {
-                        //Otherwise, price is false and the user is notified
+                    } else {
+                        // Otherwise, price is false and the user is notified
                         validBin = false;
                         JOptionPane.showMessageDialog(frame, "Invalid bin number.");
                         break;
@@ -108,12 +106,10 @@ public class RemoveItem {
                         FileEditor.removeByBin(strBin);
                         close();
                     }
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(frame, "Incorrect password.");
                 }
 
-                
             }
         });
     }
