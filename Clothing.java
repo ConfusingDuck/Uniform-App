@@ -23,7 +23,7 @@ public class Clothing {
     }
 
     public Clothing(String dataLine) {
-        String[] words = dataLine.split("\\|");
+        String[] words = dataLine.split("|");
         init(words[0], words[1], words[2], Double.valueOf(words[3]), words[4], words[5], words[6]);
         binNum = getLatestBinNum() + 1;
     }
