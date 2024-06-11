@@ -11,7 +11,6 @@ public class Clothing {
     private String username;
     private int binNum;
 
-
     public Clothing() {
         price = 0;
         condition = "";
@@ -25,24 +24,28 @@ public class Clothing {
 
     public Clothing(String dataLine) {
         String[] words = dataLine.split("|");
-        init(words[0], words[1], words[2], Double.valueOf(words[3]), words[4], words[5]);
+        init(words[0], words[1], words[2], Double.valueOf(words[3]), words[4], words[5], words[6]);
         binNum = getLatestBinNum() + 1;
     }
 
-//Find a way to add bin number and make it increase by 1 each time an item is added
+    // Find a way to add bin number and make it increase by 1 each time an item is
+    // added
 
-    public Clothing(String username, String name, String condition, double price, String imagePath, String size) {
-        init(username, name, condition, price, imagePath, size);
+    public Clothing(String username, String name, String condition, double price, String imagePath, String size,
+            String gender) {
+        init(username, name, condition, price, imagePath, size, gender);
         binNum = getLatestBinNum() + 1;
     }
 
-    private void init(String username, String name, String condition, double price, String imagePath, String size) {
+    private void init(String username, String name, String condition, double price, String imagePath, String size,
+            String gender) {
         this.username = username;
         this.name = name;
         this.condition = condition;
         this.price = price;
         this.imagePath = imagePath;
         this.size = size;
+        this.gender = gender;
     }
 
     public void setUsername(String u) {
@@ -102,30 +105,27 @@ public class Clothing {
         return name;
     }
 
-    public int getLatestBinNum(){
+    public int getLatestBinNum() {
         try {
             FileReader fr = new FileReader("clothingList.txt");
             BufferedReader br = new BufferedReader(fr);
 
             String last = "", line = "";
-            while ((line = br.readLine()) != null) { 
+            while ((line = br.readLine()) != null) {
                 last = line;
             }
             br.close();
             if (last.equals("")) {
                 return 0;
-            }
-            else {
+            } else {
                 String[] words = last.split("|");
                 if (words.length != 7) {
                     return 0;
-                }
-                else {
+                } else {
                     return (Integer.parseInt(words[1]));
                 }
-            }  
-        }
-        catch(IOException e) {     
+            }
+        } catch (IOException e) {
         }
         return 0;
     }
