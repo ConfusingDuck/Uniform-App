@@ -102,7 +102,7 @@ public class FileEditor {
             while ((line = br.readLine()) != null){
                 String[] words = line.split("|");
                 //If the bin number is found, it is not added to the list, and thus removed when the list is rewritten to the file
-                if (words[-1].equals(binNum)) {
+                if (words[words.length - 1].equals(binNum)) {
                 }
                 else {
                     clothes.add(line);
