@@ -12,19 +12,18 @@ import javax.imageio.ImageIO;
 public class GUI2 extends JFrame {
     private JFrame window;
     private JPanel clothingPanel;
-    private JPanel addItemPanel;
+    private JPanel filterPanel;
     private List<Clothing> clothes;
-    private List<Clothing> allClothes; // To keep all clothing items for filtering
+    private List<Clothing> allClothes;
     private JButton btnAddItem;
-    private JButton btnRemoveItem;
 
     public GUI2(String username, User user) {
         // Initialize clothing lists
         clothes = new ArrayList<>();
         allClothes = new ArrayList<>();
         // Add clothing items with actual image paths
-        allClothes.add(new Clothing(user.getUsername(), "T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large"));
-        allClothes.add(new Clothing(user.getUsername(), "Jeans", "Brand-new", 39.99, "jeans example.png", "small"));
+        allClothes.add(new Clothing("T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large", "men"));
+        allClothes.add(new Clothing("Jeans", "Brand-new", 39.99, "jeans example.png", "small", "women"));
         // Add more clothing items as needed
 
         clothes.addAll(allClothes);
@@ -37,14 +36,10 @@ public class GUI2 extends JFrame {
         window.setLayout(new BorderLayout());
 
         // Add a panel at the bottom to hold the new item button
-        addItemPanel = new JPanel();
-        addItemPanel.setLayout(new FlowLayout());
+        JPanel addItemPanel = new JPanel();
         btnAddItem = new JButton("Add New Item");
         btnAddItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
-        btnRemoveItem = new JButton("Remove Existing Item");
-        btnRemoveItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         addItemPanel.add(btnAddItem);
-        addItemPanel.add(btnRemoveItem);
         window.add(addItemPanel, BorderLayout.SOUTH);
 
         // Add a panel for the title and buttons
@@ -89,11 +84,57 @@ public class GUI2 extends JFrame {
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         window.add(scrollPane, BorderLayout.CENTER);
 
+        // Add a side panel for filters
+        filterPanel = new JPanel();
+        filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.Y_AXIS));
+        filterPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
+
+        // Add filter options
+        JCheckBox extraSmallCheckBox = new JCheckBox("Extra Small");
+        JCheckBox smallCheckBox = new JCheckBox("Small");
+        JCheckBox mediumCheckBox = new JCheckBox("Medium");
+        JCheckBox largeCheckBox = new JCheckBox("Large");
+        JCheckBox extraLargeCheckBox = new JCheckBox("Extra Large");
+        JCheckBox menCheckBox = new JCheckBox("Men");
+        JCheckBox womenCheckBox = new JCheckBox("Women");
+        JCheckBox lightlyWornCheckBox = new JCheckBox("Lightly Worn");
+        JCheckBox moderatelyWornCheckBox = new JCheckBox("Moderately Worn");
+        JCheckBox heavilyWornCheckBox = new JCheckBox("Heavily Worn");
+        JCheckBox brandNewCheckBox = new JCheckBox("Brand New");
+
+        filterPanel.add(extraSmallCheckBox);
+        filterPanel.add(smallCheckBox);
+        filterPanel.add(mediumCheckBox);
+        filterPanel.add(largeCheckBox);
+        filterPanel.add(extraLargeCheckBox);
+        filterPanel.add(menCheckBox);
+        filterPanel.add(womenCheckBox);
+        filterPanel.add(lightlyWornCheckBox);
+        filterPanel.add(moderatelyWornCheckBox);
+        filterPanel.add(heavilyWornCheckBox);
+        filterPanel.add(brandNewCheckBox);
+
+        JButton applyFiltersButton = new JButton("Apply Filters");
+        filterPanel.add(applyFiltersButton);
+
+        window.add(filterPanel, BorderLayout.WEST);
+
         // Add action listeners to buttons
         shortSleevesButton.addActionListener(e -> filterClothing("Short Sleeves"));
         longSleevesButton.addActionListener(e -> filterClothing("Long Sleeves"));
         sweaterButton.addActionListener(e -> filterClothing("Sweater"));
         pantsButton.addActionListener(e -> filterClothing("Pants"));
+
+        applyFiltersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                applyFilters(extraSmallCheckBox.isSelected(), smallCheckBox.isSelected(),
+                        mediumCheckBox.isSelected(), largeCheckBox.isSelected(),
+                        extraLargeCheckBox.isSelected(), menCheckBox.isSelected(), womenCheckBox.isSelected(),
+                        lightlyWornCheckBox.isSelected(), moderatelyWornCheckBox.isSelected(),
+                        heavilyWornCheckBox.isSelected(), brandNewCheckBox.isSelected());
+            }
+        });
 
         window.setVisible(true);
 
@@ -138,6 +179,32 @@ public class GUI2 extends JFrame {
         clothes.clear();
         for (Clothing clothing : allClothes) {
             if (clothing.getName().equalsIgnoreCase(filter)) {
+                clothes.add(clothing);
+            }
+        }
+        populateClothingPanel();
+    }
+
+    private void applyFilters(boolean extraSmall, boolean small, boolean medium, boolean large,
+            boolean extraLarge, boolean men, boolean women,
+            boolean lightlyWorn, boolean moderatelyWorn, boolean heavilyWorn, boolean brandNew) {
+        clothes.clear();
+        for (Clothing clothing : allClothes) {
+            boolean matchesSize = (extraSmall && clothing.getSize().equalsIgnoreCase("extra small"))
+                    || (small && clothing.getSize().equalsIgnoreCase("small"))
+                    || (medium && clothing.getSize().equalsIgnoreCase("medium"))
+                    || (large && clothing.getSize().equalsIgnoreCase("large"))
+                    || (extraLarge && clothing.getSize().equalsIgnoreCase("extra large"));
+
+            boolean matchesGender = (men && clothing.getGender().equalsIgnoreCase("men"))
+                    || (women && clothing.getGender().equalsIgnoreCase("women"));
+
+            boolean matchesCondition = (lightlyWorn && clothing.getCondition().equalsIgnoreCase("lightly-worn"))
+                    || (moderatelyWorn && clothing.getCondition().equalsIgnoreCase("moderately-worn"))
+                    || (heavilyWorn && clothing.getCondition().equalsIgnoreCase("heavily-worn"))
+                    || (brandNew && clothing.getCondition().equalsIgnoreCase("brand-new"));
+
+            if (matchesSize && matchesGender && matchesCondition) {
                 clothes.add(clothing);
             }
         }
@@ -194,5 +261,4 @@ public class GUI2 extends JFrame {
     public void close() {
         window.setVisible(false);
     }
-
 }
