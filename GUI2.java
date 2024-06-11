@@ -239,12 +239,21 @@ public class GUI2 extends JFrame {
         gbc.gridy = 2;
         panel.add(priceLabel, gbc);
 
-//Fix Bin Num!!!
-
-
         JLabel binNumLabel = new JLabel("Bin number: " + clothing.getBinNum());
         gbc.gridy = 3;
         panel.add(binNumLabel, gbc);
+
+        JButton btnSeeMore = new JButton("See contact info");
+        gbc.gridy = 4;
+        panel.add(btnSeeMore, gbc);
+
+        btnSeeMore.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MoreInfo infoWindow = new MoreInfo(clothing);
+                infoWindow.show();
+            }
+        });
 
         // Resize the image and add to JLabel
         JLabel imageLabel = new JLabel(new ImageIcon(resizeImage(clothing.getImagePath(), 100, 100)));

@@ -114,7 +114,7 @@ public class User {
 		return clothingItems;
 	}
 
-	public String getContactInfo(String username){
+	public static String getContactInfo(String username){
 		String info = "";
 		try {
 			FileReader fr = new FileReader(username + ".txt");

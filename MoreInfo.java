@@ -17,7 +17,7 @@ public class MoreInfo {
     private JPanel panel;
     private JLabel lblName;
 
-    public MoreInfo(String username, User user) {
+    public MoreInfo(Clothing clothing) {
         frame = new JFrame();
         panel = new JPanel();
 
@@ -33,8 +33,12 @@ public class MoreInfo {
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
-        lblName = new JLabel("Contact Info: " + user.getContactInfo(username));
+        lblName = new JLabel("Contact Info: " + User.getContactInfo(clothing.getUsername()));
         lblName.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+
+        c.gridx = 0;
+        c.gridy = 0;
+        panel.add(lblName, c);
     }
 
     public void show() {
