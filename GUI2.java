@@ -164,6 +164,7 @@ public class GUI2 extends JFrame {
     }
 
     public void populateClothingPanel() {
+        ArrayList<Clothing> clothes = FileEditor.retreiveAll();
         clothingPanel.removeAll();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 50, 10, 10);
