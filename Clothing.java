@@ -122,7 +122,7 @@ public class Clothing {
                 if (words.length != 7) {
                     return 0;
                 } else {
-                    return (Integer.parseInt(words[1]));
+                    return (Integer.parseInt(words[-1]));
                 }
             }
         } catch (IOException e) {
@@ -132,6 +132,6 @@ public class Clothing {
 
     public String toString() {
         rPrice = String.format("%.2f", price);
-        return (username + "|" + name + "|" + condition + "|" + rPrice + "|" + imagePath + "|" + size + "|" + binNum);
+        return (username + "|" + name + "|" + condition + "|" + rPrice + "|" + imagePath + "|" + size + "|" + gender + "|" + binNum);
     }
 }

@@ -26,7 +26,7 @@ public class FileEditor {
             while ((line = br.readLine()) != null) {
                 String[] words = line.split("|");
                 //Checks the last element, the bin number, to see if the number matches
-                if (words[6].equals(binNum)) {
+                if (words[-1].equals(binNum)) {
                     Clothing clothing = new Clothing(line);
                     return clothing;
                 }
@@ -79,7 +79,7 @@ public class FileEditor {
             while ((line = br.readLine()) != null){
                 String[] words = line.split("|");
                 //If the bin number is found, it is not added to the list, and thus removed when the list is rewritten to the file
-                if (words[6].equals(binNum)) {
+                if (words[-1].equals(binNum)) {
                 }
                 else {
                     clothes.add(line);
