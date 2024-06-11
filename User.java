@@ -24,6 +24,7 @@ public class User {
 	}
 
 	public int signUp(String user, String pswd) {
+		username = user;
 		// The file name will be the username
 		fileName = user + ".txt";
 		// Create a .txt file for each new user to store their password
@@ -70,6 +71,7 @@ public class User {
 	}
 
 	public boolean login(String user, String pswd) {
+		username = user;
 		fileName = user + ".txt";
 		try {
 			// Read the password in the file
@@ -87,6 +89,21 @@ public class User {
 		}
 		// Returns false if true is not returned
 		return false;
+	}
+
+	public String getPassword() {
+		fileName = username + ".txt";
+		try {
+			// Read the password in the file
+			FileReader fr = new FileReader(fileName);
+			BufferedReader br = new BufferedReader(fr);
+			String pass = br.readLine();
+			br.close();
+			return pass;
+			// If the file's password equals the entered String, the user is granted access
+		} catch (IOException e) {
+		}
+		return password;
 	}
 
 	public void setClothingItem(Clothing item) {

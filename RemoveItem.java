@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -21,14 +22,21 @@ public class RemoveItem {
     private JFrame frame;
     private JPanel panel;
     private JLabel lblBinNum;
+    private JLabel lblPassword;
     private JTextField txtBinNum;
+    private JPasswordField pfPassword;
     private JButton btnRemove;
     private boolean validBin;
     private String strBin;
+    private String password;
+    private char[] pf;
 
-    public RemoveItem() {
+    //Add password box
+
+    public RemoveItem(User user) {
         validBin = true;
         strBin = "";
+        password = "";
         frame = new JFrame();
         panel = new JPanel();
 
@@ -46,10 +54,13 @@ public class RemoveItem {
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
-        lblBinNum = new JLabel("Enter the bin number of the\nitem you want to remove:");
+        lblBinNum = new JLabel("Enter the bin number of the item you want to remove:");
         txtBinNum = new JTextField(3);
+        lblBinNum = new JLabel("Enter password for confirmation: ");
+        pfPassword = new JPasswordField(10);
         btnRemove = new JButton("Remove listed item");
         lblBinNum.setFont(new Font("Sans'serif", Font.PLAIN, 16));
+        lblPassword.setFont(new Font("Sans'serif", Font.PLAIN, 16));
         btnRemove.setFont(new Font("Sans'serif", Font.PLAIN, 16));
 
         c.gridx = 0;
@@ -58,7 +69,10 @@ public class RemoveItem {
         c.gridx = 1;
         panel.add(txtBinNum, c);
         c.gridy = 1;
+        panel.add(pfPassword, c);
         c.gridx = 0;
+        panel.add(lblPassword, c);
+        c.gridy = 2;
         panel.add(btnRemove, c);
 
         btnRemove.addActionListener(new ActionListener() {
@@ -77,9 +91,19 @@ public class RemoveItem {
                         break;
                     }
                 }
+                pf = pfPassword.getPassword();
+                // Password field return an array of chars, which we convert to a string
+                password = String.valueOf(pf);
+
                 if (validBin) {
-                    FileEditor.removeByBin(strBin);
-                    close();
+                    if (user.getPassword().equals(password)) {
+                        FileEditor.removeByBin(strBin);
+                        close();
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(frame, "Incorrect password.");
+                    }
+                    
                 }
             }
         });
