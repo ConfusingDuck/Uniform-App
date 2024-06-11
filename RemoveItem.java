@@ -79,6 +79,7 @@ public class RemoveItem {
                 }
                 if (validBin) {
                     FileEditor.removeByBin(strBin);
+                    close();
                 }
             }
         });

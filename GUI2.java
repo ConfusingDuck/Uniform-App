@@ -38,7 +38,7 @@ public class GUI2 extends JFrame {
 
         // Add a panel at the bottom to hold the new item button
         addItemPanel = new JPanel();
-        addItemPanel.setLayout(new BorderLayout());
+        addItemPanel.setLayout(new FlowLayout());
         btnAddItem = new JButton("Add New Item");
         btnAddItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         btnRemoveItem = new JButton("Remove Existing Item");
