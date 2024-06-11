@@ -57,7 +57,7 @@ public class RemoveItem {
         panel.add(lblBinNum, c);
         c.gridx = 1;
         panel.add(txtBinNum, c);
-        c.gridy = 0;
+        c.gridy = 1;
         c.gridx = 0;
         panel.add(btnRemove, c);
 
