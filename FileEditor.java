@@ -21,11 +21,13 @@ public class FileEditor {
             FileReader fr = new FileReader("clothingList.txt");
             BufferedReader br = new BufferedReader(fr);
             while ((line = br.readLine()) != null) {
-                if (line.contains(binNum)) {
+                String[] words = line.split("|");
+                if (words[6].equals(binNum)) {
                     Clothing clothing = new Clothing(line);
                     return clothing;
                 }
             }
+            br.close();
         }
         catch(IOException e) {
         }
@@ -40,11 +42,13 @@ public class FileEditor {
             FileReader fr = new FileReader("clothingList.txt");
             BufferedReader br = new BufferedReader(fr);
             while ((line = br.readLine()) != null) {
-                if (line.contains(filter)) {
+                String[] words = line.split("|");
+                if (words[6].equals(filter)) {
                     Clothing clothing = new Clothing(line);
                     clothes.add(clothing);
                 }
             }
+            br.close();
             if (clothes.size() > 0) {
                 return clothes;
             }
@@ -54,5 +58,33 @@ public class FileEditor {
         Clothing clothing = new Clothing();
         clothes.add(clothing);
         return clothes;
+    }
+
+    public static void removeByBin(String binNum) {
+        String line = "";
+        ArrayList<String> clothes = new ArrayList<String>();
+        try {
+            FileReader fr = new FileReader("clothingList.txt");
+            BufferedReader br = new BufferedReader(fr);
+            while ((line = br.readLine()) != null){
+                String[] words = line.split("|");
+                if (words[6].equals(binNum)) {
+                }
+                else {
+                    clothes.add(line);
+                }
+            }
+            br.close();
+
+            FileWriter fw = new FileWriter("clothingList.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < clothes.size(); i++) {
+                bw.write(clothes.get(i));
+                bw.newLine();
+            }
+            bw.close();
+        }
+        catch (IOException e) {
+        }
     }
 }
