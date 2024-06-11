@@ -24,8 +24,8 @@ public class GUI2 extends JFrame {
         allClothes = new ArrayList<>();
         // Add clothing items with actual image paths
         allClothes.add(
-                new Clothing(username, "Short-Sleeve Polo", "Lightly worn", 19.99, "jeans example.png", "l", "men's"));
-        allClothes.add(new Clothing(username, "Pants", "new", 39.99, "jeans example.png", "s", "women's"));
+                new Clothing(username, "Short-Sleeve Polo", "Lightly worn", 19.99, "jeans example.png", "l", "men's", Clothing.getLatestBinNum()));
+        allClothes.add(new Clothing(username, "Pants", "new", 39.99, "jeans example.png", "s", "women's", Clothing.getLatestBinNum()));
         // Add more clothing items as needed
 
         clothes.addAll(allClothes);

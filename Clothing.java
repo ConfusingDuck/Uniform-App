@@ -24,18 +24,16 @@ public class Clothing {
 
     public Clothing(String dataLine) {
         String[] words = dataLine.split("\\|");
-        init(words[0], words[1], words[2], Double.valueOf(words[3]), words[4], words[5], words[6]);
-        binNum = getLatestBinNum() + 1;
+        init(words[0], words[1], words[2], Double.valueOf(words[3]), words[4], words[5], words[6], Integer.valueOf(words[7]));
     }
 
     public Clothing(String username, String name, String condition, double price, String imagePath, String size,
-            String gender) {
-        init(username, name, condition, price, imagePath, size, gender);
-        binNum = getLatestBinNum() + 1;
+            String gender, int binNum) {
+        init(username, name, condition, price, imagePath, size, gender, binNum);
     }
 
     private void init(String username, String name, String condition, double price, String imagePath, String size,
-            String gender) {
+            String gender, int binNum) {
         this.username = username;
         this.name = name;
         this.condition = condition;
@@ -43,6 +41,7 @@ public class Clothing {
         this.imagePath = imagePath;
         this.size = size;
         this.gender = gender;
+        this.binNum = binNum;
     }
 
     public void setUsername(String u) {
@@ -105,7 +104,7 @@ public class Clothing {
         return binNum;
     }
 
-    public int getLatestBinNum() {
+    public static int getLatestBinNum() {
         try {
             FileReader fr = new FileReader("clothingList.txt");
             BufferedReader br = new BufferedReader(fr);
