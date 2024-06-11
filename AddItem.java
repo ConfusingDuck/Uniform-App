@@ -29,10 +29,10 @@ public class AddItem extends JFrame {
     private JLabel lblItem;
 
     private JTextField txtPrice;
-    private JComboBox<String> cmbCondition;
-    private JComboBox<String> cmbGender;
-    private JComboBox<String> cmbSize;
-    private JComboBox<String> cmbItem;
+    private JComboBox cmbCondition;
+    private JComboBox cmbGender;
+    private JComboBox cmbSize;
+    private JComboBox cmbItem;
 
     private JFileChooser fcUpload;
     private JButton btnUpload;
@@ -161,16 +161,25 @@ public class AddItem extends JFrame {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 strPrice = txtPrice.getText();
                 // Check the price text box to ensure that only digits and decimal points can be
                 // added
-                validPrice = strPrice.matches("^\\d*\\.?\\d*$");
+                validPrice = strPrice.length() > 0;
+                for (int i = 0; i < strPrice.length(); i++) {
+                    if ((int) strPrice.charAt(i) >= 48 && (int) strPrice.charAt(i) <= 57 || strPrice.charAt(i) == 46) {
+                    } else {
+                        // Otherwise, price is false and the user is notified
+                        validPrice = false;
+                        JOptionPane.showMessageDialog(frame, "Invalid price.");
+                        break;
+                    }
+                }
                 if (validPrice) {
                     // If the string only contains digits and a decimal point, then the price can be
                     // made a double
-                    price = Double.parseDouble(strPrice);
+                    price = Double.valueOf(strPrice);
                 }
-
                 // Gather all the specifics from the user's entry
                 condition = cmbCondition.getSelectedItem().toString();
                 gender = cmbGender.getSelectedItem().toString();
@@ -179,20 +188,21 @@ public class AddItem extends JFrame {
                 // If the inputted fields are not spaces (default value), then the submission is
                 // valid
                 if (condition.equals(" ") || gender.equals(" ") || size.equals(" ") || item.equals(" ")
-                        || !validPrice) {
+                        || validPrice == false) {
                     JOptionPane.showMessageDialog(frame, "Invalid submission.");
                 } else {
                     Clothing clothing = new Clothing(user.getUsername(), item, condition, price, imagePath, size,
                             gender);
-
                     user.setClothingItem(clothing);
                     FileEditor.storePicture(clothing);
                     FileEditor.storeClothingItem(clothing);
                     gui2.populateClothingPanel();
                     close();
+
                 }
             }
         });
+
     }
 
     /* This method makes the pane visible */

@@ -3,7 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -21,8 +22,12 @@ public class GUI2 extends JFrame {
         // Initialize clothing lists
         clothes = new ArrayList<>();
         allClothes = new ArrayList<>();
-        // Load clothing items from file
-        loadClothingItems();
+        // Add clothing items with actual image paths
+        allClothes.add(new Clothing(username, "T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large", "men"));
+        allClothes.add(new Clothing(username, "Jeans", "Brand-new", 39.99, "jeans example.png", "small", "women"));
+        // Add more clothing items as needed
+
+        clothes.addAll(allClothes);
 
         // Set up the main window
         window = new JFrame("Clothing Marketplace");
@@ -119,10 +124,10 @@ public class GUI2 extends JFrame {
         window.add(filterPanel, BorderLayout.WEST);
 
         // Add action listeners to buttons
-        shortSleevesButton.addActionListener(e -> filterClothingByType("Short-Sleeve Polo"));
-        longSleevesButton.addActionListener(e -> filterClothingByType("Long-Sleeve Polo"));
-        sweaterButton.addActionListener(e -> filterClothingByType("Sweater"));
-        pantsButton.addActionListener(e -> filterClothingByType("Pants"));
+        shortSleevesButton.addActionListener(e -> filterClothing("Short Sleeves"));
+        longSleevesButton.addActionListener(e -> filterClothing("Long Sleeves"));
+        sweaterButton.addActionListener(e -> filterClothing("Sweater"));
+        pantsButton.addActionListener(e -> filterClothing("Pants"));
 
         applyFiltersButton.addActionListener(new ActionListener() {
             @Override
@@ -174,10 +179,10 @@ public class GUI2 extends JFrame {
         clothingPanel.repaint();
     }
 
-    private void filterClothingByType(String type) {
+    private void filterClothing(String filter) {
         clothes.clear();
         for (Clothing clothing : allClothes) {
-            if (clothing.getName().equalsIgnoreCase(type)) {
+            if (clothing.getName().equalsIgnoreCase(filter)) {
                 clothes.add(clothing);
             }
         }
@@ -189,19 +194,19 @@ public class GUI2 extends JFrame {
             boolean lightlyWorn, boolean moderatelyWorn, boolean heavilyWorn, boolean brandNew) {
         clothes.clear();
         for (Clothing clothing : allClothes) {
-            boolean matchesSize = (extraSmall && clothing.getSize().equalsIgnoreCase("xs"))
-                    || (small && clothing.getSize().equalsIgnoreCase("s"))
-                    || (medium && clothing.getSize().equalsIgnoreCase("m"))
-                    || (large && clothing.getSize().equalsIgnoreCase("l"))
-                    || (extraLarge && clothing.getSize().equalsIgnoreCase("xl"));
+            boolean matchesSize = (extraSmall && clothing.getSize().equalsIgnoreCase("extra small"))
+                    || (small && clothing.getSize().equalsIgnoreCase("small"))
+                    || (medium && clothing.getSize().equalsIgnoreCase("medium"))
+                    || (large && clothing.getSize().equalsIgnoreCase("large"))
+                    || (extraLarge && clothing.getSize().equalsIgnoreCase("extra large"));
 
-            boolean matchesGender = (men && clothing.getGender().equalsIgnoreCase("men's"))
-                    || (women && clothing.getGender().equalsIgnoreCase("women's"));
+            boolean matchesGender = (men && clothing.getGender().equalsIgnoreCase("men"))
+                    || (women && clothing.getGender().equalsIgnoreCase("women"));
 
-            boolean matchesCondition = (lightlyWorn && clothing.getCondition().equalsIgnoreCase("lightly worn"))
-                    || (moderatelyWorn && clothing.getCondition().equalsIgnoreCase("moderately worn"))
-                    || (heavilyWorn && clothing.getCondition().equalsIgnoreCase("heavily worn"))
-                    || (brandNew && clothing.getCondition().equalsIgnoreCase("new"));
+            boolean matchesCondition = (lightlyWorn && clothing.getCondition().equalsIgnoreCase("lightly-worn"))
+                    || (moderatelyWorn && clothing.getCondition().equalsIgnoreCase("moderately-worn"))
+                    || (heavilyWorn && clothing.getCondition().equalsIgnoreCase("heavily-worn"))
+                    || (brandNew && clothing.getCondition().equalsIgnoreCase("brand-new"));
 
             if (matchesSize && matchesGender && matchesCondition) {
                 clothes.add(clothing);
@@ -212,8 +217,11 @@ public class GUI2 extends JFrame {
 
     private JPanel createClothingPanel(Clothing clothing) {
         JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.BOTH;
 
         JLabel nameLabel = new JLabel(clothing.getName());
         nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -242,43 +250,12 @@ public class GUI2 extends JFrame {
     private Image resizeImage(String imagePath, int width, int height) {
         try {
             BufferedImage originalImage = ImageIO.read(new File(imagePath));
-            if (originalImage != null) {
-                return originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            } else {
-                System.err.println("Error: Image file could not be read: " + imagePath);
-                return getPlaceholderImage(width, height); // Use a placeholder image
-            }
-        } catch (IOException e) {
-            System.err.println("IOException: Can't read input file: " + imagePath);
-            return getPlaceholderImage(width, height); // Use a placeholder image
-        }
-    }
-
-    private Image getPlaceholderImage(int width, int height) {
-        BufferedImage placeholder = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = placeholder.createGraphics();
-        g2d.setColor(Color.GRAY);
-        g2d.fillRect(0, 0, width, height);
-        g2d.setColor(Color.RED);
-        g2d.drawString("Image Not Found", 10, height / 2);
-        g2d.dispose();
-        return placeholder;
-    }
-
-    private void loadClothingItems() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("clothingList.txt"));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Clothing clothing = new Clothing(line);
-                allClothes.add(clothing);
-            }
-            reader.close();
+            Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return resizedImage;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        // Make sure to initialize the clothes list with allClothes
-        clothes.addAll(allClothes);
     }
 
     public void show() {
