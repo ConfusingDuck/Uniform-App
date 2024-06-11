@@ -114,4 +114,18 @@ public class User {
 		return clothingItems;
 	}
 
+	public String getContactInfo(String username){
+		String info = "";
+		try {
+			FileReader fr = new FileReader(username + ".txt");
+			BufferedReader br = new BufferedReader(fr);
+			br.readLine();
+			for (int i = 0; i < 3; i++) {
+				info = info + br.readLine() + " | ";
+			}
+		}
+		catch (IOException e) {
+		}
+		return info;
+	}
 }
