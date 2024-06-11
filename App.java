@@ -15,7 +15,5 @@ public class App {
         GUI gui = new GUI();
         gui.show();
 
-        // AddItem itemBoard = new AddItem(user);
-        // itemBoard.show();
     }
 }
