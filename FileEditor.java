@@ -33,7 +33,7 @@ public class FileEditor {
                     bi = ImageIO.read(new File("jeans example.png"));
                     File storedImage = new File(clothing.getBinNum() + ".png");
                     ImageIO.write(bi, "png", storedImage);
-                    clothing.setImagePath("jeans example.png");
+                    clothing.setImagePath("No_image_available.png");
                 }
                 catch(IOException u) {
                 }
