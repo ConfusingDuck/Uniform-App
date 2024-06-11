@@ -242,27 +242,12 @@ public class GUI2 extends JFrame {
     private Image resizeImage(String imagePath, int width, int height) {
         try {
             BufferedImage originalImage = ImageIO.read(new File(imagePath));
-            if (originalImage != null) {
-                return originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            } else {
-                System.err.println("Error: Image file could not be read: " + imagePath);
-                return getPlaceholderImage(width, height); // Use a placeholder image
-            }
+            Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return resizedImage;
         } catch (IOException e) {
-            System.err.println("IOException: Can't read input file: " + imagePath);
-            return getPlaceholderImage(width, height); // Use a placeholder image
+            e.printStackTrace();
+            return null;
         }
-    }
-
-    private Image getPlaceholderImage(int width, int height) {
-        BufferedImage placeholder = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = placeholder.createGraphics();
-        g2d.setColor(Color.GRAY);
-        g2d.fillRect(0, 0, width, height);
-        g2d.setColor(Color.RED);
-        g2d.drawString("Image Not Found", 10, height / 2);
-        g2d.dispose();
-        return placeholder;
     }
 
     private void loadClothingItems() {
