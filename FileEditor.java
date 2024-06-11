@@ -40,6 +40,22 @@ public class FileEditor {
             }
     }
 
+    public static ArrayList<Clothing> retreiveAll() {
+        ArrayList<Clothing> clothes = new ArrayList<Clothing>();
+        String line = "";
+        try {
+            FileReader fr = new FileReader("clothingList.txt");
+            BufferedReader br = new BufferedReader(fr);
+            while ((line = br.readLine()) != null) {
+                Clothing clothing = new Clothing(line);
+                clothes.add(clothing);
+            }
+        }
+        catch (IOException e) {
+        }
+        return clothes;
+    }
+
     /*This method searches the file for a specific clothing item by its unique bin number */
     public static Clothing retreiveByBin(String binNum) {
         String line = " ";
