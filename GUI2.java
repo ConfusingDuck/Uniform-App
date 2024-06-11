@@ -16,6 +16,7 @@ public class GUI2 extends JFrame {
     private List<Clothing> clothes;
     private List<Clothing> allClothes; // To keep all clothing items for filtering
     private JButton btnAddItem;
+    private JButton btnRemoveItem;
 
     public GUI2(String username, User user) {
         // Initialize clothing lists
@@ -40,7 +41,10 @@ public class GUI2 extends JFrame {
         addItemPanel.setLayout(new BorderLayout());
         btnAddItem = new JButton("Add New Item");
         btnAddItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
+        btnRemoveItem = new JButton("Remove Existing Item");
+        btnRemoveItem.setFont(new Font("Sans-serif", Font.PLAIN, 16));
         addItemPanel.add(btnAddItem);
+        addItemPanel.add(btnRemoveItem);
         window.add(addItemPanel, BorderLayout.SOUTH);
 
         // Add a panel for the title and buttons
@@ -99,6 +103,15 @@ public class GUI2 extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 AddItem addItemWindow = new AddItem(user);
                 addItemWindow.show();
+            }
+        });
+
+        // Add action listener to the btnRemoveItem button
+        btnRemoveItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RemoveItem removeItemWindow = new RemoveItem();
+                removeItemWindow.show();
             }
         });
 

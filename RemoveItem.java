@@ -83,4 +83,12 @@ public class RemoveItem {
             }
         });
     }
+
+    public void show() {
+        frame.setVisible(true);
+    }
+
+    public void close() {
+        frame.setVisible(false);
+    }
 }
