@@ -146,7 +146,7 @@ public class GUI2 extends JFrame {
         btnAddItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddItem addItemWindow = new AddItem(user);
+                AddItem addItemWindow = new AddItem(user, GUI2.this);
                 addItemWindow.show();
             }
         });
@@ -162,7 +162,7 @@ public class GUI2 extends JFrame {
 
     }
 
-    private void populateClothingPanel() {
+    public void populateClothingPanel() {
         clothingPanel.removeAll();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 50, 10, 10);

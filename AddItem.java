@@ -53,7 +53,7 @@ public class AddItem extends JFrame {
     private final String[] sizes = { " ", "XS", "S", "M", "L", "XL" };
     private final String[] items = { " ", "Short-Sleeve Polo", "Long-Sleeve Polo", "Sweater", "Pants" };
 
-    public AddItem(User user) {
+    public AddItem(User user, GUI2 gui2) {
         imagePath = " ";
         strPrice = "";
         validPrice = true;
@@ -191,10 +191,12 @@ public class AddItem extends JFrame {
                         || validPrice == false) {
                     JOptionPane.showMessageDialog(frame, "Invalid submission.");
                 } else {
-                    Clothing clothing = new Clothing(user.getUsername(), item, condition, price, imagePath, size, gender);
+                    Clothing clothing = new Clothing(user.getUsername(), item, condition, price, imagePath, size,
+                            gender);
                     user.setClothingItem(clothing);
-                    FileEditor.storeClothingItem(clothing);
                     FileEditor.storePicture(clothing);
+                    FileEditor.storeClothingItem(clothing);
+                    gui2.populateClothingPanel();
                     close();
 
                 }

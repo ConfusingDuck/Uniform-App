@@ -23,13 +23,10 @@ public class Clothing {
     }
 
     public Clothing(String dataLine) {
-        String[] words = dataLine.split("|");
+        String[] words = dataLine.split("\\|");
         init(words[0], words[1], words[2], Double.valueOf(words[3]), words[4], words[5], words[6]);
         binNum = getLatestBinNum() + 1;
     }
-
-    // Find a way to add bin number and make it increase by 1 each time an item is
-    // added
 
     public Clothing(String username, String name, String condition, double price, String imagePath, String size,
             String gender) {
@@ -121,20 +118,22 @@ public class Clothing {
             if (last.equals("")) {
                 return 0;
             } else {
-                String[] words = last.split("|");
-                if (words.length != 7) {
+                String[] words = last.split("\\|");
+                if (words.length < 8) { // Change the check to 8, as binNum makes it 8 fields
                     return 0;
                 } else {
-                    return (Integer.parseInt(words[-1]));
+                    return (Integer.parseInt(words[7])); // Correct the index to the last element
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
         }
         return 0;
     }
 
     public String toString() {
         rPrice = String.format("%.2f", price);
-        return (username + "|" + name + "|" + condition + "|" + rPrice + "|" + imagePath + "|" + size + "|" + gender + "|" + binNum);
+        return (username + "|" + name + "|" + condition + "|" + rPrice + "|" + imagePath + "|" + size + "|" + gender
+                + "|" + binNum);
     }
 }
