@@ -1,2 +1,3 @@
 victorbanica|Short-Sleeve Polo|Heavily Worn|11.00|1.png|XS|Men's|1
 victorbanica|Short-Sleeve Polo|Moderately Worn|11.00|2.png|L|Men's|2
+victorbanica|Long-Sleeve Polo|Heavily Worn|1000.00|jeans example.png|S|Men's|3
