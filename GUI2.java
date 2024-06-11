@@ -23,8 +23,9 @@ public class GUI2 extends JFrame {
         clothes = new ArrayList<>();
         allClothes = new ArrayList<>();
         // Add clothing items with actual image paths
-        allClothes.add(new Clothing(username, "T-Shirt", "Lightly-used", 19.99, "jeans example.png", "large", "men"));
-        allClothes.add(new Clothing(username, "Jeans", "Brand-new", 39.99, "jeans example.png", "small", "women"));
+        allClothes.add(
+                new Clothing(username, "Short-Sleeve Polo", "Lightly worn", 19.99, "jeans example.png", "l", "men's"));
+        allClothes.add(new Clothing(username, "Pants", "New", 39.99, "jeans example.png", "s", "women's"));
         // Add more clothing items as needed
 
         clothes.addAll(allClothes);
@@ -60,8 +61,8 @@ public class GUI2 extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
 
-        JButton shortSleevesButton = new JButton("Short Sleeves");
-        JButton longSleevesButton = new JButton("Long Sleeves");
+        JButton shortSleevesButton = new JButton("Short-Sleeve Polo");
+        JButton longSleevesButton = new JButton("Long-Sleeve Polo");
         JButton sweaterButton = new JButton("Sweater");
         JButton pantsButton = new JButton("Pants");
 
@@ -124,10 +125,10 @@ public class GUI2 extends JFrame {
         window.add(filterPanel, BorderLayout.WEST);
 
         // Add action listeners to buttons
-        shortSleevesButton.addActionListener(e -> filterClothing("Short Sleeves"));
-        longSleevesButton.addActionListener(e -> filterClothing("Long Sleeves"));
-        sweaterButton.addActionListener(e -> filterClothing("Sweater"));
-        pantsButton.addActionListener(e -> filterClothing("Pants"));
+        shortSleevesButton.addActionListener(e -> filterClothingByType("Short-Sleeve Polo"));
+        longSleevesButton.addActionListener(e -> filterClothingByType("Long-Sleeve Polo"));
+        sweaterButton.addActionListener(e -> filterClothingByType("Sweater"));
+        pantsButton.addActionListener(e -> filterClothingByType("Pants"));
 
         applyFiltersButton.addActionListener(new ActionListener() {
             @Override
@@ -179,10 +180,10 @@ public class GUI2 extends JFrame {
         clothingPanel.repaint();
     }
 
-    private void filterClothing(String filter) {
+    private void filterClothingByType(String type) {
         clothes.clear();
         for (Clothing clothing : allClothes) {
-            if (clothing.getName().equalsIgnoreCase(filter)) {
+            if (clothing.getName().equalsIgnoreCase(type)) {
                 clothes.add(clothing);
             }
         }
@@ -194,19 +195,19 @@ public class GUI2 extends JFrame {
             boolean lightlyWorn, boolean moderatelyWorn, boolean heavilyWorn, boolean brandNew) {
         clothes.clear();
         for (Clothing clothing : allClothes) {
-            boolean matchesSize = (extraSmall && clothing.getSize().equalsIgnoreCase("extra small"))
-                    || (small && clothing.getSize().equalsIgnoreCase("small"))
-                    || (medium && clothing.getSize().equalsIgnoreCase("medium"))
-                    || (large && clothing.getSize().equalsIgnoreCase("large"))
-                    || (extraLarge && clothing.getSize().equalsIgnoreCase("extra large"));
+            boolean matchesSize = (extraSmall && clothing.getSize().equalsIgnoreCase("xs"))
+                    || (small && clothing.getSize().equalsIgnoreCase("s"))
+                    || (medium && clothing.getSize().equalsIgnoreCase("m"))
+                    || (large && clothing.getSize().equalsIgnoreCase("l"))
+                    || (extraLarge && clothing.getSize().equalsIgnoreCase("xl"));
 
-            boolean matchesGender = (men && clothing.getGender().equalsIgnoreCase("men"))
-                    || (women && clothing.getGender().equalsIgnoreCase("women"));
+            boolean matchesGender = (men && clothing.getGender().equalsIgnoreCase("men's"))
+                    || (women && clothing.getGender().equalsIgnoreCase("women's"));
 
-            boolean matchesCondition = (lightlyWorn && clothing.getCondition().equalsIgnoreCase("lightly-worn"))
-                    || (moderatelyWorn && clothing.getCondition().equalsIgnoreCase("moderately-worn"))
-                    || (heavilyWorn && clothing.getCondition().equalsIgnoreCase("heavily-worn"))
-                    || (brandNew && clothing.getCondition().equalsIgnoreCase("brand-new"));
+            boolean matchesCondition = (lightlyWorn && clothing.getCondition().equalsIgnoreCase("lightly worn"))
+                    || (moderatelyWorn && clothing.getCondition().equalsIgnoreCase("moderately worn"))
+                    || (heavilyWorn && clothing.getCondition().equalsIgnoreCase("heavily worn"))
+                    || (brandNew && clothing.getCondition().equalsIgnoreCase("new"));
 
             if (matchesSize && matchesGender && matchesCondition) {
                 clothes.add(clothing);
