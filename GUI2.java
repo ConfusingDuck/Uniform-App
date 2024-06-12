@@ -169,6 +169,7 @@ public class GUI2 extends JFrame {
 
     /* This method populates the screen with panels for each clothing item */
     public void populateClothingPanel() {
+        allClothes = FileEditor.retreiveAll();
         // Clears it to update
         clothingPanel.removeAll();
         GridBagConstraints gbc = new GridBagConstraints();
