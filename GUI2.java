@@ -85,7 +85,7 @@ public class GUI2 extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
 
         // Create a panel for each clothing item
-        populateClothingPanel();
+        populateClothingPanel(); // Populating with all clothes initially
 
         // Add a scroll pane to the clothing panel
         JScrollPane scrollPane = new JScrollPane(clothingPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -134,7 +134,7 @@ public class GUI2 extends JFrame {
         pantsButton.addActionListener(e -> filterClothingByType("Pants"));
         btnSeeAll.addActionListener(e -> seeAllClothing()); // Add action listener for "See All" button
 
-        /*This action listener applies the filters that the user selected */
+        /* This action listener applies the filters that the user selected */
         applyFiltersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -167,18 +167,17 @@ public class GUI2 extends JFrame {
         });
     }
 
-    /*This method populates the screen with panels for each clothing item */
+    /* This method populates the screen with panels for each clothing item */
     public void populateClothingPanel() {
-        ArrayList<Clothing> clothes = FileEditor.retreiveAll();
-        //Clears it to update
+        // Clears it to update
         clothingPanel.removeAll();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 50, 10, 10);
         gbc.fill = GridBagConstraints.BOTH;
 
-        //Continuously adds an item row by row
+        // Continuously adds an item row by row
         int row = 0;
-        for (Clothing clothing : clothes) {
+        for (Clothing clothing : allClothes) { // Using allClothes to populate all items
             gbc.gridx = 0;
             gbc.gridy = row;
             clothingPanel.add(createClothingPanel(clothing), gbc);
@@ -188,23 +187,45 @@ public class GUI2 extends JFrame {
         clothingPanel.repaint();
     }
 
-    /*This function filters clothing items by their type */
-    private void filterClothingByType(String type) {
-        clothes.clear();
-        //Clears the list of clothes and adds only the items with that filter type
-        for (Clothing clothing : allClothes) {
-            if (clothing.getName().equalsIgnoreCase(type)) {
-                clothes.add(clothing);
-            }
+    /*
+     * This method populates the screen with panels for each filtered clothing item
+     */
+    public void populateFilteredClothingPanel(List<Clothing> filteredClothes) { // New method
+        clothingPanel.removeAll();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 50, 10, 10);
+        gbc.fill = GridBagConstraints.BOTH;
+
+        int row = 0;
+        for (Clothing clothing : filteredClothes) {
+            gbc.gridx = 0;
+            gbc.gridy = row;
+            clothingPanel.add(createClothingPanel(clothing), gbc);
+            row++;
         }
-        populateClothingPanel();
+        clothingPanel.revalidate();
+        clothingPanel.repaint();
     }
 
-    /*This function applies the filters selected and displays only items with the selected filters */
+    /* This function filters clothing items by their type */
+    private void filterClothingByType(String type) {
+        List<Clothing> filteredClothes = new ArrayList<>();
+        for (Clothing clothing : allClothes) {
+            if (clothing.getName().equalsIgnoreCase(type)) {
+                filteredClothes.add(clothing);
+            }
+        }
+        populateFilteredClothingPanel(filteredClothes); // Using new method
+    }
+
+    /*
+     * This function applies the filters selected and displays only items with the
+     * selected filters
+     */
     private void applyFilters(boolean extraSmall, boolean small, boolean medium, boolean large,
             boolean extraLarge, boolean men, boolean women,
             boolean lightlyWorn, boolean moderatelyWorn, boolean heavilyWorn, boolean brandNew) {
-        clothes.clear();
+        List<Clothing> filteredClothes = new ArrayList<>();
         for (Clothing clothing : allClothes) {
             boolean matchesSize = (extraSmall && clothing.getSize().equalsIgnoreCase("xs"))
                     || (small && clothing.getSize().equalsIgnoreCase("s"))
@@ -220,24 +241,19 @@ public class GUI2 extends JFrame {
                     || (heavilyWorn && clothing.getCondition().equalsIgnoreCase("heavily worn"))
                     || (brandNew && clothing.getCondition().equalsIgnoreCase("new"));
 
-            // The item must match at least one selected size, one selected gender, and one condition
-            // selected condition to be added to the filtered list.
             if (matchesSize && matchesGender && matchesCondition) {
-                clothes.add(clothing);
+                filteredClothes.add(clothing);
             }
         }
-        populateClothingPanel();
+        populateFilteredClothingPanel(filteredClothes); // Using new method
     }
 
-    /*Resets the list with all clothes in it */
+    /* Resets the list with all clothes in it */
     private void seeAllClothing() {
-        // Reset the clothes list to show all clothing items
-        clothes.clear();
-        clothes.addAll(allClothes);
-        populateClothingPanel();
+        populateClothingPanel(); // Using existing method
     }
 
-    /*This function creates a panel to host the clothing image and details */
+    /* This function creates a panel to host the clothing image and details */
     private JPanel createClothingPanel(Clothing clothing) {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -268,7 +284,7 @@ public class GUI2 extends JFrame {
         gbc.gridy = 4;
         panel.add(btnSeeMore, gbc);
 
-        //The button when pressed opens a window to show contact info
+        // The button when pressed opens a window to show contact info
         btnSeeMore.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -287,7 +303,7 @@ public class GUI2 extends JFrame {
         return panel;
     }
 
-    /*This function resizes the image so it can fit in the panel */
+    /* This function resizes the image so it can fit in the panel */
     private Image resizeImage(String imagePath, int width, int height) {
         try {
             BufferedImage originalImage = ImageIO.read(new File(imagePath));
