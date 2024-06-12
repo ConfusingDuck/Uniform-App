@@ -28,7 +28,7 @@ public class GUI2 extends JFrame {
         clothes.addAll(allClothes);
 
         // Set up the main window
-        window = new JFrame("Clothing Marketplace");
+        window = new JFrame("Uneed-Form Marketplace");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(1500, 1000);
         window.setLocationRelativeTo(null);
@@ -49,7 +49,7 @@ public class GUI2 extends JFrame {
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
         // Add a title label
-        JLabel titleLabel = new JLabel("Clothing Marketplace", SwingConstants.CENTER);
+        JLabel titleLabel = new JLabel("Uneed-Form Marketplace", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         topPanel.add(titleLabel);

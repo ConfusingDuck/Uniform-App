@@ -69,7 +69,7 @@ public class AddItem extends JFrame {
         // c is given insets to pad objects in the layout
         c.insets = new Insets(0, 5, 20, 0);
 
-        frame.setTitle("Uniform Marketplace");
+        frame.setTitle("Uneed-Form Marketplace");
         frame.setSize(800, 500);
         frame.setLocationRelativeTo(null);
         frame.add(panel);

@@ -32,7 +32,6 @@ public class RemoveItem {
     private String password;
     private char[] pf;
 
-
     public RemoveItem(User user, GUI2 gui2) {
         validBin = true;
         strBin = "";
@@ -48,7 +47,7 @@ public class RemoveItem {
         c.insets = new Insets(0, 5, 20, 0);
 
         // Automatically close program when frame is closed.
-        frame.setTitle("Uniform Marketplace");
+        frame.setTitle("Uneed-Form Marketplace");
         frame.setSize(700, 400);
         frame.setLocationRelativeTo(null);
         frame.add(panel);

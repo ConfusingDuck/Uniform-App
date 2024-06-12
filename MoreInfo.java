@@ -30,12 +30,12 @@ public class MoreInfo {
         // c is given insets to pad objects in the layout
         c.insets = new Insets(0, 5, 20, 0);
 
-        frame.setTitle("Uniform Marketplace");
+        frame.setTitle("Uneed-form Marketplace");
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
-        //Display the user's contact info with the getContactInfo method
+        // Display the user's contact info with the getContactInfo method
         lblName = new JLabel("Contact Info: " + User.getContactInfo(clothing.getUsername()));
         lblName.setFont(new Font("Sans-serif", Font.PLAIN, 16));
 
@@ -47,5 +47,5 @@ public class MoreInfo {
     public void show() {
         frame.setVisible(true);
     }
-    
+
 }
