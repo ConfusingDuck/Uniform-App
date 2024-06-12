@@ -62,6 +62,7 @@ public class FileEditor {
                 Clothing clothing = new Clothing(line);
                 clothes.add(clothing);
             }
+            br.close();
         }
         catch (IOException e) {
         }
