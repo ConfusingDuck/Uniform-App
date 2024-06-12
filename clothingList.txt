@@ -4,3 +4,6 @@ victorbanica|Short-Sleeve Polo|Heavily Worn|9.00|5.png|XS|Men's|5
 victorbanica|Long-Sleeve Polo|Moderately Worn|10000.00|6.png|S|Women's|6
 poop2|Pants|New|69.00|7.png|XL|Women's|7
 victorbanica|Long-Sleeve Polo|Heavily Worn|100.00|No_image_available.png|M|Women's|8
+victorbanica|Short-Sleeve Polo|Moderately Worn|1111111.00|No_image_available.png|XS|Women's|9
+victorbanica|Sweater|Moderately Worn|1111111111111111.00|No_image_available.png|XS|Men's|10
+victorbanica|Long-Sleeve Polo|Heavily Worn|22222222222.00|No_image_available.png|XS|Men's|11

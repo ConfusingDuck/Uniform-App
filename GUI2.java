@@ -97,30 +97,54 @@ public class GUI2 extends JFrame {
         filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.Y_AXIS));
         filterPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
 
-        // Add filter options
+        // Add Size filter group
+        JPanel sizePanel = new JPanel();
+        sizePanel.setLayout(new BoxLayout(sizePanel, BoxLayout.Y_AXIS));
+        sizePanel.setBorder(BorderFactory.createTitledBorder("Size"));
+
         JCheckBox extraSmallCheckBox = new JCheckBox("Extra Small");
         JCheckBox smallCheckBox = new JCheckBox("Small");
         JCheckBox mediumCheckBox = new JCheckBox("Medium");
         JCheckBox largeCheckBox = new JCheckBox("Large");
         JCheckBox extraLargeCheckBox = new JCheckBox("Extra Large");
+
+        sizePanel.add(extraSmallCheckBox);
+        sizePanel.add(smallCheckBox);
+        sizePanel.add(mediumCheckBox);
+        sizePanel.add(largeCheckBox);
+        sizePanel.add(extraLargeCheckBox);
+
+        filterPanel.add(sizePanel);
+
+        // Add Gender filter group
+        JPanel genderPanel = new JPanel();
+        genderPanel.setLayout(new BoxLayout(genderPanel, BoxLayout.Y_AXIS));
+        genderPanel.setBorder(BorderFactory.createTitledBorder("Gender"));
+
         JCheckBox menCheckBox = new JCheckBox("Men");
         JCheckBox womenCheckBox = new JCheckBox("Women");
+
+        genderPanel.add(menCheckBox);
+        genderPanel.add(womenCheckBox);
+
+        filterPanel.add(genderPanel);
+
+        // Add Condition filter group
+        JPanel conditionPanel = new JPanel();
+        conditionPanel.setLayout(new BoxLayout(conditionPanel, BoxLayout.Y_AXIS));
+        conditionPanel.setBorder(BorderFactory.createTitledBorder("Condition"));
+
         JCheckBox lightlyWornCheckBox = new JCheckBox("Lightly Worn");
         JCheckBox moderatelyWornCheckBox = new JCheckBox("Moderately Worn");
         JCheckBox heavilyWornCheckBox = new JCheckBox("Heavily Worn");
         JCheckBox brandNewCheckBox = new JCheckBox("Brand New");
 
-        filterPanel.add(extraSmallCheckBox);
-        filterPanel.add(smallCheckBox);
-        filterPanel.add(mediumCheckBox);
-        filterPanel.add(largeCheckBox);
-        filterPanel.add(extraLargeCheckBox);
-        filterPanel.add(menCheckBox);
-        filterPanel.add(womenCheckBox);
-        filterPanel.add(lightlyWornCheckBox);
-        filterPanel.add(moderatelyWornCheckBox);
-        filterPanel.add(heavilyWornCheckBox);
-        filterPanel.add(brandNewCheckBox);
+        conditionPanel.add(lightlyWornCheckBox);
+        conditionPanel.add(moderatelyWornCheckBox);
+        conditionPanel.add(heavilyWornCheckBox);
+        conditionPanel.add(brandNewCheckBox);
+
+        filterPanel.add(conditionPanel);
 
         JButton applyFiltersButton = new JButton("Apply Filters");
         filterPanel.add(applyFiltersButton);
