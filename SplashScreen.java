@@ -7,6 +7,7 @@ import javax.swing.JWindow;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+/*This class displays the splash screen image */
 public class SplashScreen extends JWindow {
     private JPanel panel;
     private ImageIcon picture;

@@ -1,5 +1,6 @@
 import java.io.*;
 
+/*This class builds clothing objects with properties listed below*/
 public class Clothing {
     private double price;
     private String condition;
@@ -11,6 +12,7 @@ public class Clothing {
     private String username;
     private int binNum;
 
+    /*This constructor builds a blank clothing item */
     public Clothing() {
         price = 0;
         condition = "";
@@ -22,16 +24,20 @@ public class Clothing {
         binNum = getLatestBinNum() + 1;
     }
 
+    /*This constructor initliazes a clothing item using just the string from the file*/
     public Clothing(String dataLine) {
         String[] words = dataLine.split("\\|");
         init(words[0], words[1], words[2], Double.valueOf(words[3]), words[4], words[5], words[6], Integer.valueOf(words[7]));
     }
 
+    /*This method allows for a clothing item to be made by inputting all of its features*/
     public Clothing(String username, String name, String condition, double price, String imagePath, String size,
             String gender, int binNum) {
         init(username, name, condition, price, imagePath, size, gender, binNum);
     }
 
+    /*This method is private and is used to initliaze
+     *Was made to avoid repetition in the different constructors*/
     private void init(String username, String name, String condition, double price, String imagePath, String size,
             String gender, int binNum) {
         this.username = username;
@@ -44,6 +50,7 @@ public class Clothing {
         this.binNum = binNum;
     }
 
+    /*All of the set and get functions below simply set or return a feature of the clothing item*/
     public void setUsername(String u) {
         username = u;
     }
@@ -104,6 +111,9 @@ public class Clothing {
         return binNum;
     }
 
+    /*Gets the next bin number to be associated with a clothing item
+     *Generates a new unique bin number by incrementing the last used bin number by 1
+     Is static so that it does not pertain to an object, but can be used by all objects and without an instance of the class*/
     public static int getLatestBinNum() {
         try {
             FileReader fr = new FileReader("clothingList.txt");
@@ -114,22 +124,27 @@ public class Clothing {
                 last = line;
             }
             br.close();
+            //If the last line is null (there are no clothing items in the file), return 0
             if (last.equals("")) {
                 return 0;
             } else {
                 String[] words = last.split("\\|");
-                if (words.length < 8) { // Change the check to 8, as binNum makes it 8 fields
+                //If the array size is less than 8, the number of features in a clothing item, return 0
+                if (words.length < 8) {
                     return 0;
                 } else {
+                    //Otherwise, return the correct index of the last element
                     return (Integer.parseInt(words[7])); // Correct the index to the last element
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //Return 0 if errors occur
         return 0;
     }
 
+    /*This method converts the object's data to a string that is ready to be written to a file */
     public String toString() {
         rPrice = String.format("%.2f", price);
         return (username + "|" + name + "|" + condition + "|" + rPrice + "|" + imagePath + "|" + size + "|" + gender

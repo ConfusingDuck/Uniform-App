@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+/*This simple screen provides contact information of the user who wants to sell a uniform
+ *Buyers view this screen to get in contact with the sellers*/
 public class MoreInfo {
     private JFrame frame;
     private JPanel panel;
@@ -33,6 +35,7 @@ public class MoreInfo {
         frame.setLocationRelativeTo(null);
         frame.add(panel);
 
+        //Display the user's contact info with the getContactInfo method
         lblName = new JLabel("Contact Info: " + User.getContactInfo(clothing.getUsername()));
         lblName.setFont(new Font("Sans-serif", Font.PLAIN, 16));
 

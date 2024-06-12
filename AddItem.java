@@ -18,6 +18,8 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 
+/*This class allows the user to add a new clothing item
+ * Also allows the user to upload a picture of the item*/
 public class AddItem extends JFrame {
     private JFrame frame;
     private JPanel panel;

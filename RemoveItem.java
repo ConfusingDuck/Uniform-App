@@ -17,6 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+/*This screen appears when the user wants to remove an item they have listed*/
 public class RemoveItem {
 
     private JFrame frame;
@@ -31,7 +32,6 @@ public class RemoveItem {
     private String password;
     private char[] pf;
 
-    // Add password box
 
     public RemoveItem(User user, GUI2 gui2) {
         validBin = true;

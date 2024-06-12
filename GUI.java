@@ -29,6 +29,7 @@ public class GUI {
     private JPasswordField pfPassword;
     private char[] pf;
 
+    /*This screen is the login screen and allows the user to sign up or login*/
     public GUI() {
 
         frame = new JFrame();

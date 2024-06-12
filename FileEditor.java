@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+/*This class is used to read and write from the clothinglist file
+ * Returns clothing items by various search types*
+ * Contains only static methods because no objects of this class are to be made
+ * This class only provides functionality through methods*/
 public class FileEditor {
     
     /*This method adds a new clothing item to the file*/
@@ -19,14 +23,20 @@ public class FileEditor {
         }
     }
 
+    /*This method stores a picture in the program folder
+     *It takes the local image path the user enters and saves it with a unique bin number*/
     public static void storePicture(Clothing clothing) {
         try {
                 BufferedImage bi;
+                //Get the image using the local image path
                 bi = ImageIO.read(new File(clothing.getImagePath()));
+                //Store it in the common folder using a unique bin number
                 File storedImage = new File(clothing.getBinNum() + ".png");
                 ImageIO.write(bi, "png", storedImage);
+                //Set the image path of the object
                 clothing.setImagePath(clothing.getBinNum() + ".png");
             }
+            //If the file does not exist (image path is blank because user did not upload an image), then upload a defalut blank image
             catch (IOException e) {
                 try {
                     BufferedImage bi;
@@ -40,6 +50,8 @@ public class FileEditor {
             }
     }
 
+    /*This method retreives all clothing items from the file
+     *Returns a list of all the objects*/
     public static ArrayList<Clothing> retreiveAll() {
         ArrayList<Clothing> clothes = new ArrayList<Clothing>();
         String line = "";

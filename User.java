@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/*This class creates a user object, and stores the user's credentials and contact info */
 public class User {
 	String username;
 	String password;
@@ -23,6 +24,7 @@ public class User {
 		return username;
 	}
 
+	/*This method creates a new user by making a new file for them and writing their password to a file */
 	public int signUp(String user, String pswd) {
 		username = user;
 		// The file name will be the username
@@ -53,6 +55,7 @@ public class User {
 		}
 	}
 
+	/*This method adds the user's contact info to their file */
 	public void addContactInfo(String user, String password, String fullName, String email, String phoneNumber) {
 		fileName = user + ".txt";
 		try {
@@ -70,6 +73,7 @@ public class User {
 		}
 	}
 
+	/*This method verifies the user's username and password */
 	public boolean login(String user, String pswd) {
 		username = user;
 		fileName = user + ".txt";
@@ -91,6 +95,7 @@ public class User {
 		return false;
 	}
 
+	/*This function gets the password from the file so that it may be verified in the remove item screen */
 	public String getPassword() {
 		fileName = username + ".txt";
 		try {
@@ -110,10 +115,12 @@ public class User {
 		clothingItems.add(item);
 	}
 
+	/*Gets the user's clothing items */
 	public ArrayList<Clothing> getClothingItems() {
 		return clothingItems;
 	}
 
+	/*This method reads the user's contact info from a file and returns it as a string, ready to be displayed */
 	public static String getContactInfo(String username){
 		String info = "";
 		try {
