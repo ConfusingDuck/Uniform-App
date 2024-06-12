@@ -68,6 +68,7 @@ public class User {
 			bw.newLine();
 			bw.write(phoneNumber);
 			bw.close();
+			username = user;
 		} catch (IOException e) {
 			System.out.println("There was an error adding your contact information");
 		}
