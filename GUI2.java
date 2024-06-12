@@ -17,6 +17,7 @@ public class GUI2 extends JFrame {
     private List<Clothing> allClothes;
     private JButton btnAddItem;
     private JButton btnRemoveItem;
+    private JButton btnSeeAll;
 
     public GUI2(String username, User user) {
         // Initialize clothing lists
@@ -61,11 +62,13 @@ public class GUI2 extends JFrame {
         JButton longSleevesButton = new JButton("Long-Sleeve Polo");
         JButton sweaterButton = new JButton("Sweater");
         JButton pantsButton = new JButton("Pants");
+        btnSeeAll = new JButton("See All"); // New "See All" button
 
         buttonPanel.add(shortSleevesButton);
         buttonPanel.add(longSleevesButton);
         buttonPanel.add(sweaterButton);
         buttonPanel.add(pantsButton);
+        buttonPanel.add(btnSeeAll); // Add "See All" button to the panel
 
         topPanel.add(buttonPanel);
 
@@ -125,6 +128,7 @@ public class GUI2 extends JFrame {
         longSleevesButton.addActionListener(e -> filterClothingByType("Long-Sleeve Polo"));
         sweaterButton.addActionListener(e -> filterClothingByType("Sweater"));
         pantsButton.addActionListener(e -> filterClothingByType("Pants"));
+        btnSeeAll.addActionListener(e -> seeAllClothing()); // Add action listener for "See All" button
 
         applyFiltersButton.addActionListener(new ActionListener() {
             @Override
@@ -156,7 +160,6 @@ public class GUI2 extends JFrame {
                 removeItemWindow.show();
             }
         });
-
     }
 
     public void populateClothingPanel() {
@@ -205,10 +208,19 @@ public class GUI2 extends JFrame {
                     || (heavilyWorn && clothing.getCondition().equalsIgnoreCase("heavily worn"))
                     || (brandNew && clothing.getCondition().equalsIgnoreCase("new"));
 
+            // The item must match at least one selected size, one selected gender, and one
+            // selected condition to be added to the filtered list.
             if (matchesSize && matchesGender && matchesCondition) {
                 clothes.add(clothing);
             }
         }
+        populateClothingPanel();
+    }
+
+    private void seeAllClothing() {
+        // Reset the clothes list to show all clothing items
+        clothes.clear();
+        clothes.addAll(allClothes);
         populateClothingPanel();
     }
 
