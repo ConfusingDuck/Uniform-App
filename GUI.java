@@ -44,7 +44,7 @@ public class GUI {
 
         // Automatically close program when frame is closed.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Uniform Marketplace");
+        frame.setTitle("Uneed-Form");
         frame.setSize(800, 500);
         frame.setLocationRelativeTo(null);
         frame.add(panel);

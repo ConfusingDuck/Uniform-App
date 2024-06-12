@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 
+/*This screen displays the main marketplace
+ *It shows all the available listing
+ Allows users to add or removed their own items
+ Buyers can filter clothing by various filters to accomodate their needs*/
 public class GUI2 extends JFrame {
     private JFrame window;
     private JPanel clothingPanel;
@@ -130,6 +134,7 @@ public class GUI2 extends JFrame {
         pantsButton.addActionListener(e -> filterClothingByType("Pants"));
         btnSeeAll.addActionListener(e -> seeAllClothing()); // Add action listener for "See All" button
 
+        /*This action listener applies the filters that the user selected */
         applyFiltersButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -162,12 +167,15 @@ public class GUI2 extends JFrame {
         });
     }
 
+    /*This method populates the screen with panels for each clothing item */
     public void populateClothingPanel() {
+        //Clears it to update
         clothingPanel.removeAll();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 50, 10, 10);
         gbc.fill = GridBagConstraints.BOTH;
 
+        //Continuously adds an item row by row
         int row = 0;
         for (Clothing clothing : clothes) {
             gbc.gridx = 0;
@@ -179,8 +187,10 @@ public class GUI2 extends JFrame {
         clothingPanel.repaint();
     }
 
+    /*This function filters clothing items by their type */
     private void filterClothingByType(String type) {
         clothes.clear();
+        //Clears the list of clothes and adds only the items with that filter type
         for (Clothing clothing : allClothes) {
             if (clothing.getName().equalsIgnoreCase(type)) {
                 clothes.add(clothing);
@@ -189,6 +199,7 @@ public class GUI2 extends JFrame {
         populateClothingPanel();
     }
 
+    /*This function applies the filters selected and displays only items with the selected filters */
     private void applyFilters(boolean extraSmall, boolean small, boolean medium, boolean large,
             boolean extraLarge, boolean men, boolean women,
             boolean lightlyWorn, boolean moderatelyWorn, boolean heavilyWorn, boolean brandNew) {
@@ -208,7 +219,7 @@ public class GUI2 extends JFrame {
                     || (heavilyWorn && clothing.getCondition().equalsIgnoreCase("heavily worn"))
                     || (brandNew && clothing.getCondition().equalsIgnoreCase("new"));
 
-            // The item must match at least one selected size, one selected gender, and one
+            // The item must match at least one selected size, one selected gender, and one condition
             // selected condition to be added to the filtered list.
             if (matchesSize && matchesGender && matchesCondition) {
                 clothes.add(clothing);
@@ -217,6 +228,7 @@ public class GUI2 extends JFrame {
         populateClothingPanel();
     }
 
+    /*Resets the list with all clothes in it */
     private void seeAllClothing() {
         // Reset the clothes list to show all clothing items
         clothes.clear();
@@ -224,6 +236,7 @@ public class GUI2 extends JFrame {
         populateClothingPanel();
     }
 
+    /*This function creates a panel to host the clothing image and details */
     private JPanel createClothingPanel(Clothing clothing) {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -254,6 +267,7 @@ public class GUI2 extends JFrame {
         gbc.gridy = 4;
         panel.add(btnSeeMore, gbc);
 
+        //The button when pressed opens a window to show contact info
         btnSeeMore.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -272,6 +286,7 @@ public class GUI2 extends JFrame {
         return panel;
     }
 
+    /*This function resizes the image so it can fit in the panel */
     private Image resizeImage(String imagePath, int width, int height) {
         try {
             BufferedImage originalImage = ImageIO.read(new File(imagePath));
