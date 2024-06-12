@@ -21,13 +21,9 @@ public class GUI2 extends JFrame {
     public GUI2(String username, User user) {
         // Initialize clothing lists
         clothes = new ArrayList<>();
-        allClothes = new ArrayList<>();
-        // Add clothing items with actual image paths
-        allClothes.add(
-                new Clothing(username, "Short-Sleeve Polo", "Lightly worn", 19.99, "jeans example.png", "l", "men's", Clothing.getLatestBinNum()));
-        allClothes.add(new Clothing(username, "Pants", "new", 39.99, "jeans example.png", "s", "women's", Clothing.getLatestBinNum()));
-        // Add more clothing items as needed
+        allClothes = FileEditor.retreiveAll(); // Retrieve all clothing items from the file
 
+        // Initialize the clothes list
         clothes.addAll(allClothes);
 
         // Set up the main window
@@ -164,7 +160,6 @@ public class GUI2 extends JFrame {
     }
 
     public void populateClothingPanel() {
-        ArrayList<Clothing> clothes = FileEditor.retreiveAll();
         clothingPanel.removeAll();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 50, 10, 10);
