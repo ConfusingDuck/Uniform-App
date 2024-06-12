@@ -156,7 +156,7 @@ public class GUI2 extends JFrame {
         btnRemoveItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RemoveItem removeItemWindow = new RemoveItem(user);
+                RemoveItem removeItemWindow = new RemoveItem(user, GUI2.this);
                 removeItemWindow.show();
             }
         });

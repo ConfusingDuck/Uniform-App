@@ -33,7 +33,7 @@ public class RemoveItem {
 
     // Add password box
 
-    public RemoveItem(User user) {
+    public RemoveItem(User user, GUI2 gui2) {
         validBin = true;
         strBin = "";
         password = "";
@@ -104,6 +104,7 @@ public class RemoveItem {
                 if (user.getPassword().equals(password)) {
                     if (validBin) {
                         FileEditor.removeByBin(strBin);
+                        gui2.populateClothingPanel();
                         close();
                     }
                 } else {
